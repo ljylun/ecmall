@@ -1,0 +1,559 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件开发 SaaS商城</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* 轮播图模块 */
+        .carousel {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(120deg, #001e3c, #003a70);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .carousel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><path d='M0 0 L50 50 L100 0 Z' fill='rgba(0,255,255,0.2)' /></svg>") repeat;
+            animation: animate 5s linear infinite;
+        }
+        @keyframes animate {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+        .carousel-title {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .carousel-subtitle {
+            font-size: 1.5em;
+            color: #99d1ff;
+            margin: 10px 0;
+        }
+        .carousel-desc {
+            font-size: 1.2em;
+            color: #fff;
+        }
+        .saaS-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border-radius: 50%;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,123,255,0.5);
+        }
+        .saaS-logo-text {
+            font-size: 2em;
+            color: #fff;
+            text-align: center;
+            line-height: 1;
+        }
+
+        /* 集团业务模块 */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .business-item {
+            text-align: center;
+            padding: 20px;
+            background: #eef8ff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .business-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border-radius: 15px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2em;
+        }
+
+        /* 集团资讯模块 */
+        .news-cards {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .news-card {
+            flex: 1;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: url('https://via.placeholder.com/600x400/92cddc/001e3c?text=News+Image') no-repeat center;
+            background-size: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* 合作案例模块 */
+        .case-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .case-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .case-image {
+            width: 100%;
+            height: 300px;
+            background: url('https://via.placeholder.com/600x400/92cddc/001e3c?text=Case+Image') no-repeat center;
+            background-size: cover;
+            transition: transform 0.3s;
+        }
+        .case-item:hover .case-image {
+            transform: scale(1.05);
+        }
+        .case-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0,54,60,0.8);
+            color: #fff;
+            text-align: center;
+        }
+
+        /* 产品介绍模块 */
+        .product-section {
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .main-product {
+            flex: 1;
+            height: 300px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 2em;
+        }
+        .sub-products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+        .sub-product {
+            text-align: center;
+            padding: 20px;
+            background: #eef8ff;
+            border-radius: 10px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .sub-product-icon {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        /* 企业文化模块 */
+        .culture-section {
+            margin: 40px 0;
+            display: flex;
+            gap: 30px;
+        }
+        .culture-text {
+            flex: 1;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+        .culture-image {
+            flex: 1;
+            width: 100%;
+            height: 400px;
+            background: url('https://via.placeholder.com/600x400/92cddc/001e3c?text=Team+Image') no-repeat center;
+            background-size: cover;
+            border-radius: 10px;
+        }
+
+        /* 时间轴模块 */
+        .timeline {
+            position: relative;
+            padding: 50px 0;
+            background: #f5f5f5;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #007bff;
+            margin-left: -2px;
+        }
+        .timeline-item {
+            position: relative;
+            width: 45%;
+            padding: 20px;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .timeline-item:nth-child(odd) {
+            left: 50%;
+            transform: translateX(50%);
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* 服务模块 */
+        .service-icons {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .service-item {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            background: #eef8ff;
+            border-radius: 10px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .service-icon {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        /* 底部导航栏 */
+        .footer {
+            background: #001e3c;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-logo {
+            max-width: 150px;
+            margin: 0 auto 30px;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .footer-link {
+            padding: 10px;
+            background: #003a70;
+            border-radius: 5px;
+        }
+        .footer-qrcode {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .qrcode-item {
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 轮播图模块 -->
+    <div class="container">
+        <div class="carousel">
+            <div class="carousel-content">
+                <h1 class="carousel-title">软件开发 SaaS商城</h1>
+                <p class="carousel-subtitle">SOFTWARE DEVELOPMENT SAAS (SOFTWARE AS A SERVICE) ONLINE MALL</p>
+                <p class="carousel-desc">手机小程序、一站式服务，省心建站</p>
+            </div>
+            <div class="saaS-logo">
+                <div class="saaS-logo-text">SaaS</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 集团业务模块 -->
+    <div class="container">
+        <h2>集团业务</h2>
+        <div class="business-grid">
+            <div class="business-item">
+                <div class="business-icon">大数据</div>
+                <p>大数据</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">云计算</div>
+                <p>云计算</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">人工智能</div>
+                <p>人工智能</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">数据采集</div>
+                <p>数据采集</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">BI大屏</div>
+                <p>BI大屏</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">代运营</div>
+                <p>代运营</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">物流服务</div>
+                <p>物流服务</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">新媒体</div>
+                <p>新媒体</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">知识付费</div>
+                <p>知识付费</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">软件开发</div>
+                <p>软件开发</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">供应链</div>
+                <p>供应链</p>
+            </div>
+            <div class="business-item">
+                <div class="business-icon">售后培训</div>
+                <p>售后培训</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 集团资讯模块 -->
+    <div class="container">
+        <h2>集团资讯</h2>
+        <div class="news-cards">
+            <div class="news-card">
+                <div class="news-image"></div>
+                <p>智能化工厂引领创新，新落成的智能工厂以高度自动化、智能化的生产线，将生产效率提升30%，产品良品率提高至99.5%，为企业在激烈市场竞争中赢得先机。</p>
+            </div>
+            <div class="news-card">
+                <div class="news-image"></div>
+                <p>人机协作开启新篇章，在当今工业变革浪潮中，人机协作（Collaborative Robotics）已成为制造业转型升级的关键路径...</p>
+            </div>
+            <div class="news-card">
+                <div class="news-image"></div>
+                <p>高效仓储，一流的仓储设施配备先进的仓储管理系统，实现货物的快速出入库和精准库存管理，为企业的供应链提供坚实保障。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合作案例模块 -->
+    <div class="container">
+        <h2>合作案例</h2>
+        <div class="case-gallery">
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">企业办公大楼</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">软件系统界面</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">智能生产线</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">产品展厅</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">金融产品</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">教育机构</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">物流公司</div>
+            </div>
+            <div class="case-item">
+                <div class="case-image"></div>
+                <div class="case-title">咨询公司</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 产品介绍模块 -->
+    <div class="container">
+        <h2>产品介绍</h2>
+        <div class="product-section">
+            <div class="main-product">核心解决方案</div>
+            <div class="sub-products">
+                <div class="sub-product">
+                    <div class="sub-product-icon">📄</div>
+                    <p>文档管理</p>
+                </div>
+                <div class="sub-product">
+                    <div class="sub-product-icon">⚙️</div>
+                    <p>运维服务</p>
+                </div>
+                <div class="sub-product">
+                    <div class="sub-product-icon">📊</div>
+                    <p>数据分析</p>
+                </div>
+                <div class="sub-product">
+                    <div class="sub-product-icon">👥</div>
+                    <p>客户服务</p>
+                </div>
+                <div class="sub-product">
+                    <div class="sub-product-icon">🔒</div>
+                    <p>安全防护</p>
+                </div>
+                <div class="sub-product">
+                    <div class="sub-product-icon">🌐</div>
+                    <p>网络服务</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 企业文化模块 -->
+    <div class="container">
+        <h2>企业文化</h2>
+        <div class="culture-section">
+            <div class="culture-text">
+                <ul>
+                    <li>公司使命：提供高品质服务方案，持续为客户创造最大价值</li>
+                    <li>公司愿景：成为客户、股东、员工、社会尊敬的公司</li>
+                    <li>核心价值观：客户至上，诚信合作，德才兼备</li>
+                    <li>企业宗旨：创新为本，服务一流，专业高效，精益求精</li>
+                </ul>
+            </div>
+            <div class="culture-image"></div>
+        </div>
+    </div>
+
+    <!-- 集团发展历程模块 -->
+    <div class="container">
+        <h2>集团发展历程</h2>
+        <div class="timeline">
+            <div class="timeline-item" style="left:50%; transform: translateX(-50%);">
+                <div class="timeline-date">2019年05月20日</div>
+                <p>公司成立，开启创业征程</p>
+            </div>
+            <div class="timeline-item" style="left:50%; transform: translateX(50%);">
+                <div class="timeline-date">2020年07月22日</div>
+                <p>推出首款软件产品，获得市场认可</p>
+            </div>
+            <div class="timeline-item" style="left:50%; transform: translateX(-50%);">
+                <div class="timeline-date">2021年03月16日</div>
+                <p>建立云计算服务中心，拓展业务领域</p>
+            </div>
+            <div class="timeline-item" style="left:50%; transform: translateX(50%);">
+                <div class="timeline-date">2022年12月23日</div>
+                <p>获得行业权威奖项，提升品牌影响力</p>
+            </div>
+            <div class="timeline-item" style="left:50%; transform: translateX(-50%);">
+                <div class="timeline-date">2024年01月06日</div>
+                <p>建设新的研发中心，推动技术创新</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 我们的服务模块 -->
+    <div class="container">
+        <h2>我们的服务</h2>
+        <div class="service-icons">
+            <div class="service-item">
+                <div class="service-icon">🧠</div>
+                <p>人工智能</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🎥</div>
+                <p>智能多媒体</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🌍</div>
+                <p>互联网</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">☁️</div>
+                <p>云计算</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="footer">
+        <img src="https://via.placeholder.com/150/001e3c/fff?text=Logo" class="footer-logo">
+        <div class="footer-links">
+            <div class="footer-link">关于我们</div>
+            <div class="footer-link">产品服务</div>
+            <div class="footer-link">合作伙伴</div>
+            <div class="footer-link">联系我们</div>
+        </div>
+        <div class="footer-qrcode">
+            <div class="qrcode-item"></div>
+            <div class="qrcode-item"></div>
+            <div class="qrcode-item"></div>
+        </div>
+    </div>
+</body>
+</html>

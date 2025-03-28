@@ -1,0 +1,1015 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件开发 SaaS商城</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f7f9fc;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #053a70;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .section-desc {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 16px;
+            color: #666;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 轮播图/Banner部分 */
+        .banner {
+            height: 500px;
+            background: linear-gradient(135deg, #053a70, #1a73e8);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="100" y1="0" x2="0" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            width: 60%;
+        }
+        
+        .banner-title {
+            font-size: 48px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .banner-subtitle {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .banner-desc {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .banner-image {
+            position: absolute;
+            right: 5%;
+            bottom: 10%;
+            width: 350px;
+            height: 350px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><text x="10" y="120" font-family="Arial" font-size="80" font-weight="bold" fill="rgba(255,255,255,0.7)">SaaS</text></svg>') no-repeat;
+            transform: perspective(500px) rotateY(-15deg);
+            z-index: 1;
+        }
+        
+        /* 集团业务部分 */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 30px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .business-item {
+            text-align: center;
+        }
+        
+        .business-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background-color: #e8f0fe;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .business-icon:hover {
+            transform: translateY(-10px);
+        }
+        
+        .business-icon i {
+            font-size: 36px;
+            color: #1a73e8;
+        }
+        
+        .business-name {
+            font-size: 14px;
+            color: #053a70;
+            font-weight: 600;
+        }
+        
+        /* 资讯部分 */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        /* 合作案例部分 */
+        .cases-section {
+            background-color: #f0f5ff;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .case-item {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .case-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .case-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .case-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 58, 112, 0.8);
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        
+        .case-item:hover .case-name {
+            background: rgba(5, 58, 112, 1);
+        }
+        
+        /* 产品介绍部分 */
+        .product-grid {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .main-product {
+            flex: 0 0 200px;
+            text-align: center;
+        }
+        
+        .main-product-icon {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px;
+            background-color: #1a73e8;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .main-product-icon i {
+            font-size: 70px;
+            color: white;
+        }
+        
+        .sub-products {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+        
+        .sub-product {
+            text-align: center;
+        }
+        
+        .sub-product-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background-color: #e8f0fe;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .sub-product-icon:hover {
+            transform: translateY(-10px);
+        }
+        
+        .sub-product-icon i {
+            font-size: 36px;
+            color: #1a73e8;
+        }
+        
+        .product-name {
+            font-size: 14px;
+            color: #053a70;
+            font-weight: 600;
+        }
+        
+        /* 企业文化部分 */
+        .culture-section {
+            background-color: #fff;
+        }
+        
+        .culture-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .culture-content {
+            flex: 1;
+        }
+        
+        .culture-item {
+            margin-bottom: 25px;
+        }
+        
+        .culture-item-title {
+            color: #053a70;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .culture-item-text {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .culture-image {
+            flex: 1;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .culture-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 发展历程部分 */
+        .timeline-section {
+            background-color: #f0f5ff;
+            padding-bottom: 80px;
+        }
+        
+        .timeline {
+            position: relative;
+            margin-top: 60px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #1a73e8;
+            z-index: 1;
+        }
+        
+        .timeline-events {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-event {
+            width: 18%;
+            text-align: center;
+        }
+        
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 4px solid #1a73e8;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 16px;
+            color: #053a70;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 我们的服务部分 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .service-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: #f0f5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .service-item:hover .service-icon {
+            background: #e8f0fe;
+        }
+        
+        .service-icon i {
+            font-size: 50px;
+            color: #1a73e8;
+        }
+        
+        .service-name {
+            font-size: 18px;
+            color: #053a70;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .service-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #053a70;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            flex: 0 0 200px;
+        }
+        
+        .footer-logo img {
+            max-width: 150px;
+        }
+        
+        .footer-nav {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .footer-nav-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-nav-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #1a73e8;
+        }
+        
+        .footer-nav-list {
+            list-style: none;
+        }
+        
+        .footer-nav-list li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-nav-list a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-nav-list a:hover {
+            color: white;
+        }
+        
+        .footer-qrcode {
+            flex: 0 0 250px;
+            text-align: center;
+        }
+        
+        .footer-qrcode-title {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .footer-qrcodes {
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-qrcode-item {
+            width: 100px;
+        }
+        
+        .footer-qrcode-item img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 5px;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .footer-qrcode-item p {
+            font-size: 12px;
+            color: #ccc;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+    <!-- 使用Font Awesome提供图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- 轮播图部分 -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1 class="banner-title">软件开发 SaaS商城</h1>
+            <h2 class="banner-subtitle">SOFTWARE DEVELOPMENT SAAS (SOFTWARE AS A SERVICE) ONLINE MALL</h2>
+            <p class="banner-desc">手机小程序、一站式服务，省心建站</p>
+        </div>
+        <div class="banner-image"></div>
+    </section>
+    
+    <!-- 集团业务部分 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">集团业务</h2>
+            <p class="section-desc">以科技为本，助力千万企业降本增效</p>
+            
+            <div class="business-grid">
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <p class="business-name">大数据</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <p class="business-name">云计算</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <p class="business-name">人工智能</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <p class="business-name">数据采集</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <p class="business-name">BI大屏</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <p class="business-name">代运营</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <p class="business-name">物流服务</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <p class="business-name">新媒体</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <p class="business-name">知识付费</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <p class="business-name">软件开发</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <p class="business-name">供应链</p>
+                </div>
+                <div class="business-item">
+                    <div class="business-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <p class="business-name">售后培训</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 集团资讯部分 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">集团资讯</h2>
+            <p class="section-desc">企业的重要信息发布、品牌宣传、形象展示、竞争力提升、合法权益维护起到了至关重要的作用。</p>
+            
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=工厂生产线" alt="现代化的工业生产线">
+                    </div>
+                    <div class="news-content">
+                        <p class="news-text">智能化工厂引领创新，新落成的智能工厂以高度自动化、智能化的生产线，将生产效率提升30%，产品良品率提高至99.5%，为企业在激烈市场竞争中赢得先机。</p>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=智能机器人" alt="工厂车间里的智能机器人">
+                    </div>
+                    <div class="news-content">
+                        <p class="news-text">人机协作开启新篇章，在当今工业变革浪潮中，人机协作（Collaborative Robotics）已成为制造业转型升级的关键路径。它不仅融合了人工智能、自动化控制等前沿技术，更在实际应用中展现出巨大优势。通过人机协同作业，企业能够有效降低人力成本，同时显著提升生产效率和产品质量，为制造业的智能化发展注入强劲动力。</p>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=仓库货物" alt="仓库里工作人员操作叉车搬运货物">
+                    </div>
+                    <div class="news-content">
+                        <p class="news-text">高效仓储，一流的仓储设施配备先进的仓储管理系统，实现货物的快速出入库和精准库存管理，为企业的供应链提供坚实保障。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 合作案例部分 -->
+    <section class="section cases-section">
+        <div class="container">
+            <h2 class="section-title">合作案例</h2>
+            <p class="section-desc">专注于打造企业级解决方案的精品案例，成就客户</p>
+            
+            <div class="cases-grid">
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=企业办公大楼" alt="企业办公大楼">
+                    <div class="case-name">某集团企业形象设计</div>
+                </div>
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=软件界面" alt="软件系统界面">
+                    <div class="case-name">某企业管理系统开发</div>
+                </div>
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=生产线" alt="工厂生产线">
+                    <div class="case-name">某工厂智能化改造</div>
+                </div>
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=产品展示" alt="产品展示厅">
+                    <div class="case-name">某品牌产品设计</div>
+                </div>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=金融图表" alt="金融产品收益图表">
+                    <div class="case-name">某金融公司数据分析</div>
+                </div>
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=教育场景" alt="教育机构课堂场景">
+                    <div class="case-name">某教育机构在线平台</div>
+                </div>
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=物流仓库" alt="物流公司仓库和车辆">
+                    <div class="case-name">某物流公司系统优化</div>
+                </div>
+                <div class="case-item">
+                    <img src="https://via.placeholder.com/400x300/e8f0fe/053a70?text=咨询团队" alt="咨询公司会议场景">
+                    <div class="case-name">某咨询公司服务方案</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 产品介绍部分 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">产品介绍</h2>
+            <p class="section-desc">一站式服务，全方位的数字化解决方案，涵盖多种业务类型，满足客户多样化需求</p>
+            
+            <div class="product-grid">
+                <div class="main-product">
+                    <div class="main-product-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <p class="product-name">核心解决方案</p>
+                </div>
+                
+                <div class="sub-products">
+                    <div class="sub-product">
+                        <div class="sub-product-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <p class="product-name">文档管理</p>
+                    </div>
+                    <div class="sub-product">
+                        <div class="sub-product-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <p class="product-name">系统设置</p>
+                    </div>
+                    <div class="sub-product">
+                        <div class="sub-product-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <p class="product-name">数据分析</p>
+                    </div>
+                    <div class="sub-product">
+                        <div class="sub-product-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <p class="product-name">用户管理</p>
+                    </div>
+                    <div class="sub-product">
+                        <div class="sub-product-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <p class="product-name">安全防护</p>
+                    </div>
+                    <div class="sub-product">
+                        <div class="sub-product-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <p class="product-name">网络服务</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 企业文化部分 -->
+    <section class="section culture-section">
+        <div class="container">
+            <h2 class="section-title">企业文化</h2>
+            
+            <div class="culture-container">
+                <div class="culture-content">
+                    <div class="culture-item">
+                        <h3 class="culture-item-title">公司使命</h3>
+                        <p class="culture-item-text">提供高品质服务方案，持续为客户创造最大价值</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3 class="culture-item-title">公司愿景</h3>
+                        <p class="culture-item-text">成为客户、股东、员工、社会尊敬的公司</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3 class="culture-item-title">核心价值观</h3>
+                        <p class="culture-item-text">客户至上，诚信合作，德才兼备</p>
+                    </div>
+                    <div class="culture-item">
+                        <h3 class="culture-item-title">企业宗旨</h3>
+                        <p class="culture-item-text">创新为本，服务一流，专业高效，精益求精</p>
+                    </div>
+                </div>
+                
+                <div class="culture-image">
+                    <img src="https://via.placeholder.com/600x400/e8f0fe/053a70?text=企业团队合影" alt="企业团队合影">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 发展历程部分 -->
+    <section class="section timeline-section">
+        <div class="container">
+            <h2 class="section-title">集团发展历程</h2>
+            <p class="section-desc">砥砺奋进，创新科技，以数字化为驱动，助力大型企业成功转型</p>
+            
+            <div class="timeline">
+                <div class="timeline-events">
+                    <div class="timeline-event">
+                        <div class="timeline-dot">1</div>
+                        <div class="timeline-date">2019年05月20日</div>
+                        <div class="timeline-title">起点一</div>
+                        <div class="timeline-desc">公司成立，开启创业征程</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot">2</div>
+                        <div class="timeline-date">2020年07月22日</div>
+                        <div class="timeline-title">历程二</div>
+                        <div class="timeline-desc">推出首款软件产品，获得市场认可</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot">3</div>
+                        <div class="timeline-date">2021年03月16日</div>
+                        <div class="timeline-title">历程三</div>
+                        <div class="timeline-desc">建立云计算服务中心，拓展业务领域</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot">4</div>
+                        <div class="timeline-date">2022年12月23日</div>
+                        <div class="timeline-title">历程四</div>
+                        <div class="timeline-desc">获得行业权威奖项，提升品牌影响力</div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot">5</div>
+                        <div class="timeline-date">2024年01月06日</div>
+                        <div class="timeline-title">历程五</div>
+                        <div class="timeline-desc">建设新的研发中心，推动技术创新</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 我们的服务部分 -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">我们的服务</h2>
+            <p class="section-desc">提供定制化解决方案，帮助您轻松步入数字化时代</p>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="service-name">人工智能</h3>
+                    <p class="service-desc">提供智能算法和机器学习解决方案，助力企业智能化转型。</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                    <h3 class="service-name">智能多媒体</h3>
+                    <p class="service-desc">多媒体内容制作和管理服务，打造精彩视听体验。</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="service-name">互联网</h3>
+                    <p class="service-desc">互联网应用开发和运营服务，连接世界各地用户。</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="service-name">云计算</h3>
+                    <p class="service-desc">云计算和数据中心服务，提供高效、安全的计算资源。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="https://via.placeholder.com/150x50/1a73e8/ffffff?text=SaaS+Mall" alt="公司Logo">
+                </div>
+                
+                <div class="footer-nav">
+                    <div class="footer-nav-section">
+                        <h3>关于我们</h3>
+                        <ul class="footer-nav-list">
+                            <li><a href="#">企业文化</a></li>
+                            <li><a href="#">发展历程</a></li>
+                            <li><a href="#">团队介绍</a></li>
+                            <li><a href="#">公司动态</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3>产品服务</h3>
+                        <ul class="footer-nav-list">
+                            <li><a href="#">软件产品</a></li>
+                            <li><a href="#">云服务</a></li>
+                            <li><a href="#">解决方案</a></li>
+                            <li><a href="#">技术支持</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3>合作伙伴</h3>
+                        <ul class="footer-nav-list">
+                            <li><a href="#">客户案例</a></li>
+                            <li><a href="#">合作伙伴</a></li>
+                            <li><a href="#">加入我们</a></li>
+                            <li><a href="#">合作洽谈</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3>联系我们</h3>
+                        <ul class="footer-nav-list">
+                            <li><a href="#">联系方式</a></li>
+                            <li><a href="#">公司地址</a></li>
+                            <li><a href="#">在线客服</a></li>
+                            <li><a href="#">招聘信息</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-qrcode">
+                    <h3 class="footer-qrcode-title">关注我们</h3>
+                    <div class="footer-qrcodes">
+                        <div class="footer-qrcode-item">
+                            <img src="https://via.placeholder.com/80x80/ffffff/053a70?text=微信" alt="微信公众号二维码">
+                            <p>微信公众号</p>
+                        </div>
+                        <div class="footer-qrcode-item">
+                            <img src="https://via.placeholder.com/80x80/ffffff/053a70?text=小程序" alt="小程序二维码">
+                            <p>官方小程序</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>? 2025 SaaS商城 版权所有 | 技术支持：软件开发SaaS商城</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 轮播图功能（简化版本）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 这里可以添加轮播图功能的具体实现
+            console.log('页面加载成功!');
+        });
+    </script>
+</body>
+</html>

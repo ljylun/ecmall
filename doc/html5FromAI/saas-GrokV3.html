@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>软件开发SaaS商城</title>
+    <style>
+        /* 这里可以添加基本的CSS样式，实际开发中建议分离到外部CSS文件 */
+        .hero-section { background-color: #000066; color: white; text-align: center; padding: 50px; }
+        .business-grid, .news-row, .case-grid, .service-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+        .news-row { grid-template-columns: repeat(3, 1fr); }
+        .case-grid { grid-template-columns: repeat(4, 1fr); }
+        .product-introduction { display: flex; gap: 20px; }
+        .timeline { list-style: none; padding: 0; }
+        .timeline li { margin: 20px 0; }
+        .bottom-bar { background-color: #000066; color: white; padding: 20px; display: flex; justify-content: space-around; }
+    </style>
+</head>
+<body>
+    <!-- 轮播图模块 -->
+    <section class="hero-section">
+        <div class="hero-image" style="background-image: url('hero-bg.jpg'); height: 400px; background-size: cover;">
+            <div class="text-section">
+                <h1>软件开发SaaS商城</h1>
+                <h2>SOFTWARE DEVELOPMENT SAAS (SOFTWARE AS A SERVICE) ONLINE MALL</h2>
+                <p>手机小程序、一站式服务，省心建站</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 集团业务模块 -->
+    <section class="group-business-module">
+        <h2>集团业务</h2>
+        <p>以科技为本，助力千万企业降本增效</p>
+        <div class="business-grid">
+            <div class="business-icon"><img src="big_data.png" alt="大数据"><p>大数据</p></div>
+            <div class="business-icon"><img src="cloud_computing.png" alt="云计算"><p>云计算</p></div>
+            <div class="business-icon"><img src="ai.png" alt="人工智能"><p>人工智能</p></div>
+            <div class="business-icon"><img src="data_collection.png" alt="数据采集"><p>数据采集</p></div>
+            <div class="business-icon"><img src="bi_screen.png" alt="BI大屏"><p>BI大屏</p></div>
+            <div class="business-icon"><img src="operation.png" alt="代运营"><p>代运营</p></div>
+            <div class="business-icon"><img src="logistics.png" alt="物流服务"><p>物流服务</p></div>
+            <div class="business-icon"><img src="new_media.png" alt="新媒体"><p>新媒体</p></div>
+            <div class="business-icon"><img src="knowledge_pay.png" alt="知识付费"><p>知识付费</p></div>
+            <div class="business-icon"><img src="software_dev.png" alt="软件开发"><p>软件开发</p></div>
+            <div class="business-icon"><img src="supply_chain.png" alt="供应链"><p>供应链</p></div>
+            <div class="business-icon"><img src="after_sales.png" alt="售后培训"><p>售后培训</p></div>
+        </div>
+    </section>
+
+    <!-- 集团资讯模块 -->
+    <section class="group-news-module">
+        <h2>集团资讯</h2>
+        <p>企业的重要信息发布、品牌宣传、形象展示、竞争力提升、合法权益维护起到了至关重要的作用。</p>
+        <div class="news-row">
+            <div class="news-card">
+                <img src="factory_line.jpg" alt="现代化工业生产线">
+                <p>智能化工厂引领创新，新落成的智能工厂以高度自动化、智能化的生产线，将生产效率提升30%，产品良品率提高至99.5%，为企业在激烈市场竞争中赢得先机。</p>
+            </div>
+            <div class="news-card">
+                <img src="robot_workshop.jpg" alt="工厂车间智能机器人">
+                <p>人机协作开启新篇章，在当今工业变革浪潮中，人机协作已成为制造业转型升级的关键路径。它不仅融合了人工智能、自动化控制等前沿技术，更在实际应用中展现出巨大优势。</p>
+            </div>
+            <div class="news-card">
+                <img src="warehouse.jpg" alt="仓库操作场景">
+                <p>高效仓储，一流的仓储设施配备先进的仓储管理系统，实现货物的快速出入库和精准库存管理，为企业的供应链提供坚实保障。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作案例模块 -->
+    <section class="cooperation-case-module">
+        <h2>合作案例</h2>
+        <p>专注于打造企业级解决方案的精品案例，成就客户</p>
+        <div class="case-grid">
+            <div class="case"><img src="office_building.jpg" alt="企业办公楼"><span>案例一</span></div>
+            <div class="case"><img src="software_ui.jpg" alt="软件界面"><span>案例二</span></div>
+            <div class="case"><img src="factory_line_case.jpg" alt="工厂生产线"><span>案例三</span></div>
+            <div class="case"><img src="product_display.jpg" alt="产品包装"><span>案例四</span></div>
+            <div class="case"><img src="finance_chart.jpg" alt="金融收益图表"><span>案例五</span></div>
+            <div class="case"><img src="classroom.jpg" alt="课堂场景"><span>案例六</span></div>
+            <div class="case"><img src="logistics_warehouse.jpg" alt="物流仓库"><span>案例七</span></div>
+            <div class="case"><img src="meeting_room.jpg" alt="会议室讨论"><span>案例八</span></div>
+        </div>
+    </section>
+
+    <!-- 产品介绍模块 -->
+    <section class="product-introduction-module">
+        <h2>产品介绍</h2>
+        <p>一站式服务，全方位的数字化解决方案，涵盖多种业务类型，满足客户多样化需求</p>
+        <div class="product-layout">
+            <div class="large-product"><img src="core_product.png" alt="核心产品"></div>
+            <div class="small-products">
+                <div class="small-product"><img src="document.png" alt="文档管理"><p>文档管理</p></div>
+                <div class="small-product"><img src="gear.png" alt="系统设置"><p>系统设置</p></div>
+                <div class="small-product"><img src="chart.png" alt="数据分析"><p>数据分析</p></div>
+                <div class="small-product"><img src="user.png" alt="用户管理"><p>用户管理</p></div>
+                <div class="small-product"><img src="lock.png" alt="安全防护"><p>安全防护</p></div>
+                <div class="small-product"><img src="network.png" alt="网络服务"><p>网络服务</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 企业文化模块 -->
+    <section class="enterprise-culture-module">
+        <h2>企业文化</h2>
+        <div class="culture-layout">
+            <div class="culture-text">
+                <p>公司使命：提供高品质服务方案，持续为客户创造最大价值</p>
+                <p>公司愿景：成为客户、股东、员工、社会尊敬的公司</p>
+                <p>核心价值观：客户至上，诚信合作，德才兼备</p>
+                <p>企业宗旨：创新为本，服务一流，专业高效，精益求精</p>
+            </div>
+            <div class="team-image"><img src="team_photo.jpg" alt="企业团队合影"></div>
+        </div>
+    </section>
+
+    <!-- 集团发展历程模块 -->
+    <section class="group-development-history-module">
+        <h2>集团发展历程</h2>
+        <p>砥砺奋进，创新科技，以数字化为驱动，助力大型企业成功转型</p>
+        <ul class="timeline">
+            <li>2019年05月20日：公司成立，开启创业征程</li>
+            <li>2020年07月22日：推出首款软件产品，获得市场认可</li>
+            <li>2021年03月16日：建立云计算服务中心，拓展业务领域</li>
+            <li>2022年12月23日：获得行业权威奖项，提升品牌影响力</li>
+            <li>2024年01月06日：建设新的研发中心，推动技术创新</li>
+        </ul>
+    </section>
+
+    <!-- 我们的服务模块 -->
+    <section class="our-service-module">
+        <h2>我们的服务</h2>
+        <p>提供定制化解决方案，帮助您轻松步入数字化时代</p>
+        <div class="service-grid">
+            <div class="service"><img src="ai_brain.png" alt="人工智能"><p>人工智能</p></div>
+            <div class="service"><img src="video_icon.png" alt="智能多媒体"><p>智能多媒体</p></div>
+            <div class="service"><img src="globe.png" alt="互联网"><p>互联网</p></div>
+            <div class="service"><img src="cloud.png" alt="云计算"><p>云计算</p></div>
+        </div>
+    </section>
+
+    <!-- 底部导航栏 -->
+    <footer class="bottom-bar">
+        <div class="company-logo"><img src="company_logo.png" alt="企业logo"></div>
+        <div class="navigation-links">
+            <h3>关于我们</h3>
+            <ul>
+                <li>企业文化</li>
+                <li>发展历程</li>
+                <li>团队介绍</li>
+            </ul>
+            <h3>产品服务</h3>
+            <ul>
+                <li>软件产品</li>
+                <li>云服务</li>
+                <li>解决方案</li>
+            </ul>
+            <h3>合作伙伴</h3>
+            <ul>
+                <li>客户案例</li>
+                <li>合作伙伴名录</li>
+            </ul>
+            <h3>联系我们</h3>
+            <ul>
+                <li>联系方式</li>
+                <li>地址</li>
+                <li>在线客服</li>
+            </ul>
+        </div>
+        <div class="qrcode-area">
+            <img src="wechat_qr.png" alt="微信公众号二维码">
+            <img src="small_program_qr.png" alt="小程序二维码">
+            <p>扫描关注我们</p>
+        </div>
+    </footer>
+</body>
+</html>

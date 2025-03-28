@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS商城</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Microsoft YaHei', sans-serif;
+            color: #fff;
+        }
+        .section {
+            padding: 60px 20px;
+        }
+        .carousel {
+            background: linear-gradient(135deg, #0a2a4a, #1a5f91);
+            height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .carousel::after {
+            content: 'SaaS';
+            position: absolute;
+            right: 50px;
+            bottom: 50px;
+            font-size: 120px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.1);
+            transform: rotate(-15deg);
+        }
+        .carousel-content h1 {
+            font-size: 48px;
+            margin: 0 0 20px;
+        }
+        .carousel-content h2 {
+            font-size: 24px;
+            margin: 0 0 30px;
+        }
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .business-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .business-item:hover {
+            transform: translateY(-5px);
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .news-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-section {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-left {
+            flex: 1;
+        }
+        .product-right {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: rgba(255,255,255,0.2);
+        }
+        .footer {
+            background: #0a2a4a;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .business-grid { grid-template-columns: repeat(3, 1fr); }
+            .news-grid { grid-template-columns: 1fr; }
+            .case-grid { grid-template-columns: 2fr; }
+            .product-section { flex-direction: column; }
+            .footer { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 轮播图 -->
+    <div class="carousel">
+        <div class="carousel-content">
+            <h1>软件开发 SaaS商城</h1>
+            <h2>SOFTWARE DEVELOPMENT SAAS (SOFTWARE AS A SERVICE) ONLINE MALL</h2>
+            <p>手机小程序、一站式服务，省心建站</p>
+        </div>
+    </div>
+
+    <!-- 集团业务 -->
+    <div class="section">
+        <div class="business-grid">
+            <div class="business-item">大数据</div>
+            <div class="business-item">云计算</div>
+            <div class="business-item">人工智能</div>
+            <div class="business-item">数据采集</div>
+            <div class="business-item">BI大屏</div>
+            <div class="business-item">代运营</div>
+            <div class="business-item">物流服务</div>
+            <div class="business-item">新媒体</div>
+            <div class="business-item">知识付费</div>
+            <div class="business-item">软件开发</div>
+            <div class="business-item">供应链</div>
+            <div class="business-item">售后培训</div>
+        </div>
+    </div>
+
+    <!-- 集团资讯 -->
+    <div class="section" style="background: #0a2a4a;">
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="https://via.placeholder.com/400x200" alt="智能工厂">
+                <div class="content">智能化工厂引领创新...</div>
+            </div>
+            <div class="news-card">
+                <img src="https://via.placeholder.com/400x200" alt="人机协作">
+                <div class="content">人机协作开启新篇章...</div>
+            </div>
+            <div class="news-card">
+                <img src="https://via.placeholder.com/400x200" alt="仓储管理">
+                <div class="content">高效仓储...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合作案例 -->
+    <div class="section">
+        <div class="case-grid">
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例1"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例2"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例3"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例4"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例5"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例6"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例7"></div>
+            <div class="case-item"><img src="https://via.placeholder.com/280x180" alt="案例8"></div>
+        </div>
+    </div>
+
+    <!-- 产品介绍 -->
+    <div class="section product-section">
+        <div class="product-left">
+            <div class="product-icon" style="background: #1a5f91; width: 200px; height: 200px;"></div>
+        </div>
+        <div class="product-right">
+            <div class="product-icon" style="background: #1a5f91; height: 100px;"></div>
+            <div class="product-icon" style="background: #1a5f91; height: 100px;"></div>
+            <div class="product-icon" style="background: #1a5f91; height: 100px;"></div>
+            <div class="product-icon" style="background: #1a5f91; height: 100px;"></div>
+            <div class="product-icon" style="background: #1a5f91; height: 100px;"></div>
+            <div class="product-icon" style="background: #1a5f91; height: 100px;"></div>
+        </div>
+    </div>
+
+    <!-- 企业文化 -->
+    <div class="section">
+        <div style="display: flex; gap: 50px; max-width: 1200px; margin: 0 auto;">
+            <div style="flex: 1;">
+                <h3>公司使命</h3>
+                <p>提供高品质服务方案...</p>
+                <h3>公司愿景</h3>
+                <p>成为客户、股东...</p>
+                <h3>核心价值观</h3>
+                <p>客户至上，诚信合作...</p>
+                <h3>企业宗旨</h3>
+                <p>创新为本，服务一流...</p>
+            </div>
+            <div style="flex: 1;">
+                <img src="https://via.placeholder.com/600x400" alt="团队合影" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+
+    <!-- 发展历程 -->
+    <div class="section timeline">
+        <div style="position: relative; left: 50%; transform: translateX(-50%);">
+            <div class="timeline-item" style="margin-left: 50%;">
+                <h3>2019年05月20日</h3>
+                <p>公司成立，开启创业征程</p>
+            </div>
+            <div class="timeline-item" style="margin-right: 50%;">
+                <h3>2020年07月22日</h3>
+                <p>推出首款软件产品...</p>
+            </div>
+            <!-- 更多时间轴项 -->
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="footer">
+        <div class="footer-logo">LOGO</div>
+        <div class="footer-links">
+            <div>
+                <h4>关于我们</h4>
+                <a href="#">企业文化</a>
+                <a href="#">发展历程</a>
+            </div>
+            <div>
+                <h4>产品服务</h4>
+                <a href="#">软件产品</a>
+                <a href="#">云服务</a>
+            </div>
+            <div>
+                <h4>合作伙伴</h4>
+                <a href="#">客户案例</a>
+            </div>
+            <div>
+                <h4>联系我们</h4>
+                <a href="#">联系方式</a>
+            </div>
+        </div>
+        <div class="footer-qr">
+            <img src="https://via.placeholder.com/120x120" alt="公众号">
+            <p>扫码关注</p>
+        </div>
+    </div>
+</body>
+</html>
