@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件开发 SaaS 商城</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .section {
+            padding: 50px 10%;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* 轮播图模块 */
+        .slider {
+            background: #001f3f;
+            color: white;
+            text-align: center;
+            position: relative;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://dummyimage.com/1200x800/001f3f/ffffff&text=科技背景') center/cover no-repeat;
+            z-index: -1;
+            filter: brightness(0.8);
+        }
+
+        .slider h1 {
+            font-size: 48px;
+        }
+
+        .slider h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* 集团业务模块 */
+        .business {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+        }
+
+        .business-icon {
+            text-align: center;
+        }
+
+        .business-icon img {
+            width: 80px;
+            height: 80px;
+            background: #0074D9;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        /* 集团资讯模块 */
+        .news {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .news-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .news-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .news-card p {
+            padding: 10px;
+        }
+
+        /* 合作案例模块 */
+        .cases {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .case-img {
+            position: relative;
+        }
+
+        .case-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .case-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+
+        /* 产品介绍模块 */
+        .products {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-product {
+            width: 200px;
+            height: 200px;
+            background: #0074D9;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+
+        .sub-products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .sub-product {
+            text-align: center;
+        }
+
+        .sub-product img {
+            width: 60px;
+            height: 60px;
+            background: #0074D9;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        /* 企业文化模块 */
+        .culture {
+            display: flex;
+            align-items: center;
+        }
+
+        .culture-text {
+            flex: 1;
+        }
+
+        .culture-img {
+            flex: 1;
+        }
+
+        .culture-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 集团发展历程模块 */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timeline-node {
+            text-align: center;
+        }
+
+        /* 我们的服务模块 */
+        .services {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .service-icon {
+            text-align: center;
+        }
+
+        .service-icon img {
+            width: 80px;
+            height: 80px;
+            background: #0074D9;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        /* 底部导航栏 */
+        .footer {
+            background: #001f3f;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .footer-nav {
+            display: flex;
+        }
+
+        .footer-nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer-qr {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 轮播图模块 -->
+    <div class="slider section">
+        <h1>软件开发 SaaS 商城</h1>
+        <h2>SOFTWARE DEVELOPMENT SAAS (SOFTWARE AS A SERVICE) ONLINE MALL</h2>
+        <p>手机小程序、一站式服务，省心建站</p>
+    </div>
+
+    <!-- 集团业务模块 -->
+    <div class="section">
+        <div class="title">集团业务</div>
+        <div class="description">以科技为本，助力千万企业降本增效</div>
+        <div class="business">
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=大数据" alt="大数据">
+                <p>大数据</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=云计算" alt="云计算">
+                <p>云计算</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=人工智能" alt="人工智能">
+                <p>人工智能</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=数据采集" alt="数据采集">
+                <p>数据采集</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=BI大屏" alt="BI大屏">
+                <p>BI大屏</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=代运营" alt="代运营">
+                <p>代运营</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=物流服务" alt="物流服务">
+                <p>物流服务</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=新媒体" alt="新媒体">
+                <p>新媒体</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=知识付费" alt="知识付费">
+                <p>知识付费</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=软件开发" alt="软件开发">
+                <p>软件开发</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=供应链" alt="供应链">
+                <p>供应链</p>
+            </div>
+            <div class="business-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=售后培训" alt="售后培训">
+                <p>售后培训</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 集团资讯模块 -->
+    <div class="section">
+        <div class="title">集团资讯</div>
+        <div class="description">企业的重要信息发布、品牌宣传、形象展示、竞争力提升、合法权益维护起到了至关重要的作用。</div>
+        <div class="news">
+            <div class="news-card">
+                <img src="https://dummyimage.com/600x400/000/fff&text=现代化的工业生产线" alt="现代化的工业生产线">
+                <p>智能化工厂引领创新，新落成的智能工厂以高度自动化、智能化的生产线，将生产效率提升30%，产品良品率提高至99.5%，为企业在激烈市场竞争中赢得先机。</p>
+            </div>
+            <div class="news-card">
+                <img src="https://dummyimage.com/600x400/000/fff&text=工厂车间里的智能机器人" alt="工厂车间里的智能机器人">
+                <p>人机协作开启新篇章，在当今工业变革浪潮中，人机协作（Collaborative Robotics）已成为制造业转型升级的关键路径。它不仅融合了人工智能、自动化控制等前沿技术，更在实际应用中展现出巨大优势。通过人机协同作业，企业能够有效降低人力成本，同时显著提升生产效率和产品质量，为制造业的智能化发展注入强劲动力。</p>
+            </div>
+            <div class="news-card">
+                <img src="https://dummyimage.com/600x400/000/fff&text=仓库里工作人员操作叉车搬运货物" alt="仓库里工作人员操作叉车搬运货物">
+                <p>高效仓储，一流的仓储设施配备先进的仓储管理系统，实现货物的快速出入库和精准库存管理，为企业的供应链提供坚实保障。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 合作案例模块 -->
+    <div class="section">
+        <div class="title">合作案例</div>
+        <div class="description">专注于打造企业级解决方案的精品案例，成就客户</div>
+        <div class="cases">
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某企业的办公大楼外观" alt="某企业的办公大楼外观">
+                <div class="case-name">案例一</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某软件系统的操作界面" alt="某软件系统的操作界面">
+                <div class="case-name">案例二</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某工厂的生产线" alt="某工厂的生产线">
+                <div class="case-name">案例三</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某产品的包装和展示厅" alt="某产品的包装和展示厅">
+                <div class="case-name">案例四</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某金融公司的理财产品的收益图表" alt="某金融公司的理财产品的收益图表">
+                <div class="case-name">案例五</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某教育机构的课堂场景和教学设备" alt="某教育机构的课堂场景和教学设备">
+                <div class="case-name">案例六</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某物流公司的仓库和运输车辆" alt="某物流公司的仓库和运输车辆">
+                <div class="case-name">案例七</div>
+            </div>
+            <div class="case-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=某咨询公司的会议室和团队讨论场景" alt="某咨询公司的会议室和团队讨论场景">
+                <div class="case-name">案例八</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 产品介绍模块 -->
+    <div class="section">
+        <div class="title">产品介绍</div>
+        <div class="description">一站式服务，全方位的数字化解决方案，涵盖多种业务类型，满足客户多样化需求</div>
+        <div class="products">
+            <div class="main-product"></div>
+            <div class="sub-products">
+                <div class="sub-product">
+                    <img src="https://dummyimage.com/60x60/0074D9/ffffff&text=文件图标" alt="文件图标">
+                    <p>文档管理或内容服务</p>
+                </div>
+                <div class="sub-product">
+                    <img src="https://dummyimage.com/60x60/0074D9/ffffff&text=齿轮图标" alt="齿轮图标">
+                    <p>系统设置或运维服务</p>
+                </div>
+                <div class="sub-product">
+                    <img src="https://dummyimage.com/60x60/0074D9/ffffff&text=数据图表图标" alt="数据图表图标">
+                    <p>数据分析或商业智能</p>
+                </div>
+                <div class="sub-product">
+                    <img src="https://dummyimage.com/60x60/0074D9/ffffff&text=用户图标" alt="用户图标">
+                    <p>用户管理或客户服务</p>
+                </div>
+                <div class="sub-product">
+                    <img src="https://dummyimage.com/60x60/0074D9/ffffff&text=安全锁图标" alt="安全锁图标">
+                    <p>安全防护或权限管理</p>
+                </div>
+                <div class="sub-product">
+                    <img src="https://dummyimage.com/60x60/0074D9/ffffff&text=网络图标" alt="网络图标">
+                    <p>网络服务或云计算</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 企业文化模块 -->
+    <div class="section">
+        <div class="title">企业文化</div>
+        <div class="culture">
+            <div class="culture-text">
+                <p>公司使命：提供高品质服务方案，持续为客户创造最大价值</p>
+                <p>公司愿景：成为客户、股东、员工、社会尊敬的公司</p>
+                <p>核心价值观：客户至上，诚信合作，德才兼备</p>
+                <p>企业宗旨：创新为本，服务一流，专业高效，精益求精</p>
+            </div>
+            <div class="culture-img">
+                <img src="https://dummyimage.com/600x400/000/fff&text=企业团队合影" alt="企业团队合影">
+            </div>
+        </div>
+    </div>
+
+    <!-- 集团发展历程模块 -->
+    <div class="section">
+        <div class="title">集团发展历程</div>
+        <div class="description">砥砺奋进，创新科技，以数字化为驱动，助力大型企业成功转型</div>
+        <div class="timeline">
+            <div class="timeline-node">
+                <p>2019年05月20日</p>
+                <p>起点一，公司成立，开启创业征程</p>
+            </div>
+            <div class="timeline-node">
+                <p>2020年07月22日</p>
+                <p>历程二，推出首款软件产品，获得市场认可</p>
+            </div>
+            <div class="timeline-node">
+                <p>2021年03月16日</p>
+                <p>历程三，建立云计算服务中心，拓展业务领域</p>
+            </div>
+            <div class="timeline-node">
+                <p>2022年12月23日</p>
+                <p>历程四，获得行业权威奖项，提升品牌影响力</p>
+            </div>
+            <div class="timeline-node">
+                <p>2024年01月06日</p>
+                <p>历程五，建设新的研发中心，推动技术创新</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 我们的服务模块 -->
+    <div class="section">
+        <div class="title">我们的服务</div>
+        <div class="description">提供定制化解决方案，帮助您轻松步入数字化时代</div>
+        <div class="services">
+            <div class="service-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=大脑图标" alt="大脑图标">
+                <p>人工智能</p>
+            </div>
+            <div class="service-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=视频图标" alt="视频图标">
+                <p>智能多媒体</p>
+            </div>
+            <div class="service-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=地球图标" alt="地球图标">
+                <p>互联网</p>
+            </div>
+            <div class="service-icon">
+                <img src="https://dummyimage.com/80x80/0074D9/ffffff&text=云图标" alt="云图标">
+                <p>云计算</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="footer">
+        <img class="footer-logo" src="https://dummyimage.com/100x100/0074D9/ffffff&text=企业logo" alt="企业logo">
+        <div class="footer-nav">
+            <a href="#">关于我们</a>
+            <a href="#">产品服务</a>
+            <a href="#">合作伙伴</a>
+            <a href="#">联系我们</a>
+        </div>
+        <img class="footer-qr" src="https://dummyimage.com/100x100/0074D9/ffffff&text=二维码" alt="二维码">
+    </div>
+</body>
+
+</html>
+    
