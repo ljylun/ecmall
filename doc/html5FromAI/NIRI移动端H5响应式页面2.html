@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尼日利亚阿夸伊博姆州自由贸易区</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#0b5394',secondary:'#f39c12'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .banner-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        .news-item {
+            position: relative;
+            padding-left: 12px;
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #0b5394;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- 导航栏 -->
+    <nav class="bg-primary text-white fixed w-full top-0 z-50 shadow-md">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center">
+                <div class="w-8 h-8 flex items-center justify-center mr-2">
+                    <i class="ri-global-line ri-lg"></i>
+                </div>
+                <span class="font-['Pacifico'] text-lg">logo</span>
+            </div>
+            <div class="flex items-center">
+                <div class="w-8 h-8 flex items-center justify-center cursor-pointer">
+                    <i class="ri-search-line ri-lg"></i>
+                </div>
+                <div class="w-8 h-8 flex items-center justify-center cursor-pointer ml-2">
+                    <i class="ri-menu-line ri-lg"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <main class="pt-[60px] pb-16">
+        <!-- Banner区域 -->
+        <div class="banner-container w-full relative">
+            <img src="https://public.readdy.ai/ai/img_res/e524e30bddc95ee9b7b79c715d92abae.jpg" alt="尼日利亚自贸区" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                <h1 class="text-white text-lg font-semibold">尼日利亚阿夸伊博姆州自由贸易区</h1>
+                <p class="text-white text-xs">Akwa Ibom State Free Trade Zone in Nigeria</p>
+            </div>
+        </div>
+
+        <!-- 快速导航 -->
+        <div class="grid grid-cols-5 bg-white py-4 border-b">
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-10 h-10 flex items-center justify-center mb-1">
+                    <i class="ri-home-line ri-lg text-primary"></i>
+                </div>
+                <span class="text-xs whitespace-nowrap overflow-hidden text-overflow-ellipsis">首页</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-10 h-10 flex items-center justify-center mb-1">
+                    <i class="ri-building-line ri-lg text-primary"></i>
+                </div>
+                <span class="text-xs whitespace-nowrap overflow-hidden text-overflow-ellipsis">区域概况</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-10 h-10 flex items-center justify-center mb-1">
+                    <i class="ri-newspaper-line ri-lg text-primary"></i>
+                </div>
+                <span class="text-xs whitespace-nowrap overflow-hidden text-overflow-ellipsis">新闻资讯</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-10 h-10 flex items-center justify-center mb-1">
+                    <i class="ri-file-list-line ri-lg text-primary"></i>
+                </div>
+                <span class="text-xs whitespace-nowrap overflow-hidden text-overflow-ellipsis">政策文件</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-10 h-10 flex items-center justify-center mb-1">
+                    <i class="ri-customer-service-line ri-lg text-primary"></i>
+                </div>
+                <span class="text-xs whitespace-nowrap overflow-hidden text-overflow-ellipsis">服务指南</span>
+            </div>
+        </div>
+
+        <!-- 城市风貌 -->
+        <div class="px-4 py-3 bg-white mt-2">
+            <h2 class="text-base font-medium mb-3">城市风貌</h2>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/4a41fc23f13be70ec8b88eb3f6076c0f.jpg" alt="城市风貌一" class="w-full h-[80px] object-cover">
+                    <p class="text-xs text-center py-1">城市一</p>
+                </div>
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/080e62dad9ec5e3fc6a0b5b473499613.jpg" alt="城市风貌二" class="w-full h-[80px] object-cover">
+                    <p class="text-xs text-center py-1">城市二</p>
+                </div>
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/cc8531619b51ebf19fc69ef38bbc3882.jpg" alt="城市风貌三" class="w-full h-[80px] object-cover">
+                    <p class="text-xs text-center py-1">城市三</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新闻资讯 -->
+        <div class="px-4 py-3 bg-white mt-2">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center">
+                    <div class="w-5 h-5 flex items-center justify-center mr-1">
+                        <i class="ri-newspaper-line text-primary"></i>
+                    </div>
+                    <h2 class="text-base font-medium">新闻资讯</h2>
+                </div>
+                <a href="#" class="text-xs text-gray-500 flex items-center cursor-pointer">
+                    更多
+                    <div class="w-4 h-4 flex items-center justify-center">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="mb-4">
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/7ba009ffcf8026e4e64d9dd7838bf11c.jpg" alt="新闻图片" class="w-full h-[180px] object-cover">
+                    <div class="bg-gray-100 px-3 py-2">
+                        <p class="text-xs text-center">第六届"多彩贸易区"篮球赛现场</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="news-item">
+                    <div class="flex justify-between">
+                        <p class="text-sm">第六届"多彩贸易区"篮球赛圆满结束</p>
+                        <span class="text-xs text-gray-500">2025-04-02</span>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="flex justify-between">
+                        <p class="text-sm">第六届"多彩贸易区"篮球赛精彩瞬间</p>
+                        <span class="text-xs text-gray-500">2025-04-01</span>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="flex justify-between">
+                        <p class="text-sm">第六届"多彩贸易区"篮球赛开幕式盛况</p>
+                        <span class="text-xs text-gray-500">2025-03-30</span>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="flex justify-between">
+                        <p class="text-sm">第六届"多彩贸易区"篮球赛筹备工作完成</p>
+                        <span class="text-xs text-gray-500">2025-03-28</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 专题专栏 -->
+        <div class="px-4 py-3 bg-white mt-2">
+            <div class="flex items-center mb-3">
+                <div class="w-5 h-5 flex items-center justify-center mr-1">
+                    <i class="ri-focus-line text-primary"></i>
+                </div>
+                <h2 class="text-base font-medium">专题专栏</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/9f3675cabc4abaa63d3f7b3beef71b15.jpg" alt="专题一" class="w-full h-[100px] object-cover">
+                    <p class="text-xs text-center py-1">自贸区周年</p>
+                </div>
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/47d5522af585acccde8e6c974596541c.jpg" alt="专题二" class="w-full h-[100px] object-cover">
+                    <p class="text-xs text-center py-1">自贸四周年</p>
+                </div>
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/ae16639b9971d34145d130b84821e58b.jpg" alt="专题三" class="w-full h-[100px] object-cover">
+                    <p class="text-xs text-center py-1">自贸三周年</p>
+                </div>
+                <div class="rounded overflow-hidden">
+                    <img src="https://public.readdy.ai/ai/img_res/00f4994156c8809885dd14626da594db.jpg" alt="专题四" class="w-full h-[100px] object-cover">
+                    <p class="text-xs text-center py-1">自贸四周年</p>
+                </div>
+            </div>
+        </div>
+        <!-- 自贸区简介 -->
+        <div class="mt-2 flex">
+            <div class="w-7/12">
+                <img src="https://public.readdy.ai/ai/img_res/f9155961817faa29dfb1ab1b75fcdfdb.jpg" alt="自贸区简介" class="w-full h-[150px] object-cover">
+            </div>
+            <div class="w-5/12 bg-primary flex flex-col items-center justify-center px-3">
+                <h3 class="text-white text-base font-medium mb-3">自贸试验区简介</h3>
+                <button class="bg-white text-primary text-xs px-4 py-1 !rounded-button cursor-pointer">查 看</button>
+            </div>
+        </div>
+
+        <!-- 政策法规 -->
+        <div class="mt-2 flex">
+            <div class="w-5/12 bg-green-500 flex flex-col items-center justify-center px-3">
+                <h3 class="text-white text-base font-medium mb-3">政策法规</h3>
+                <button class="bg-white text-green-500 text-xs px-4 py-1 !rounded-button cursor-pointer">查 看</button>
+            </div>
+            <div class="w-7/12">
+                <img src="https://public.readdy.ai/ai/img_res/cca0f8c0909438fcfcae7cf08f3a4ede.jpg" alt="政策法规" class="w-full h-[150px] object-cover">
+            </div>
+        </div>
+
+        <!-- 联系我们 -->
+        <div class="mt-2 flex">
+            <div class="w-5/12 bg-orange-400 flex flex-col items-center justify-center px-3">
+                <h3 class="text-white text-base font-medium mb-3">联系我们</h3>
+                <button class="bg-white text-orange-400 text-xs px-4 py-1 !rounded-button cursor-pointer">查 看</button>
+            </div>
+            <div class="w-7/12 grid grid-cols-2">
+                <img src="https://public.readdy.ai/ai/img_res/1f4efeb952d8b685aa4e4f07f07209f9.jpg" alt="联系我们1" class="w-full h-[150px] object-cover">
+                <img src="https://public.readdy.ai/ai/img_res/6d96e9fb6760126212c66b42040e2e3e.jpg" alt="联系我们2" class="w-full h-[150px] object-cover">
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部导航 -->
+    <div class="fixed bottom-0 w-full bg-white border-t shadow-md">
+        <div class="grid grid-cols-5 py-2">
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-home-fill ri-lg text-primary"></i>
+                </div>
+                <span class="text-[10px] text-primary">首页</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-building-line ri-lg text-gray-500"></i>
+                </div>
+                <span class="text-[10px] text-gray-500">区域概况</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-newspaper-line ri-lg text-gray-500"></i>
+                </div>
+                <span class="text-[10px] text-gray-500">新闻资讯</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-file-list-line ri-lg text-gray-500"></i>
+                </div>
+                <span class="text-[10px] text-gray-500">政策文件</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-user-line ri-lg text-gray-500"></i>
+                </div>
+                <span class="text-[10px] text-gray-500">我的</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加点击事件
+            const menuItems = document.querySelectorAll('.cursor-pointer');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // 这里可以添加点击后的逻辑
+                    console.log('Item clicked');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
