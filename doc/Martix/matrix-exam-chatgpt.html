@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>《矩阵论》模拟考试题详细解答（修正版）</title>
+
+<style>
+body{
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
+    line-height:1.8;
+    color:#222;
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
+    background:#ffffff;
+}
+
+h1{
+    text-align:center;
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+h2{
+    border-left:6px solid #2563eb;
+    padding-left:12px;
+    margin-top:40px;
+    color:#1e3a8a;
+}
+
+h3{
+    margin-top:28px;
+    color:#1d4ed8;
+}
+
+.box{
+    background:#f8fafc;
+    border:1px solid #dbeafe;
+    border-radius:12px;
+    padding:18px;
+    margin:18px 0;
+}
+
+.formula{
+    background:#f3f4f6;
+    border-radius:8px;
+    padding:12px;
+    overflow-x:auto;
+    white-space:pre-wrap;
+    font-family:Consolas,monospace;
+    margin:12px 0;
+}
+
+.answer{
+    background:#ecfeff;
+    border-left:5px solid #0891b2;
+    padding:12px 16px;
+    margin:14px 0;
+}
+
+.note{
+    background:#fff7ed;
+    border-left:5px solid #ea580c;
+    padding:12px 16px;
+    margin-top:12px;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+    margin-top:18px;
+}
+
+th,td{
+    border:1px solid #d1d5db;
+    padding:10px;
+    vertical-align:top;
+}
+
+th{
+    background:#eff6ff;
+}
+
+.tag{
+    display:inline-block;
+    background:#dbeafe;
+    color:#1d4ed8;
+    border-radius:999px;
+    padding:4px 10px;
+    margin:4px;
+    font-size:13px;
+}
+
+ul,ol{
+    padding-left:24px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>《矩阵论》模拟考试题详细解答（修正版）</h1>
+
+<div class="box">
+<h2>试题覆盖知识点</h2>
+
+<div>
+<span class="tag">线性空间</span>
+<span class="tag">子空间</span>
+<span class="tag">内积空间</span>
+<span class="tag">Gram矩阵</span>
+<span class="tag">矩阵范数</span>
+<span class="tag">矩阵收敛性</span>
+<span class="tag">不可约矩阵</span>
+<span class="tag">奇异值</span>
+<span class="tag">Rayleigh商</span>
+<span class="tag">Jordan标准形</span>
+<span class="tag">矩阵函数</span>
+<span class="tag">Givens变换</span>
+<span class="tag">QR分解</span>
+<span class="tag">Gerschgorin圆盘</span>
+<span class="tag">广义逆矩阵</span>
+<span class="tag">Moore-Penrose逆</span>
+<span class="tag">最小二乘</span>
+</div>
+
+</div>
+
+<h2>一、填空题</h2>
+
+<div class="box">
+
+<h3>第1题</h3>
+
+<div class="formula">
+A =
+[ [ 1, 0,  i],
+  [ 0, 1,  2],
+  [-i, 2,  5] ]
+
+x = [1,1,i]
+</div>
+
+<div class="answer">
+最终答案：
+
+Ax = [0,1+2i,2+4i]^T
+
+‖Ax‖₂ = 5
+
+‖A‖₁ = 8
+
+‖A‖∞ = 8
+</div>
+
+<h4>详细解答</h4>
+
+<p>
+由于矩阵乘法要求 x 为列向量，因此实际计算时取
+</p>
+
+<div class="formula">
+x =
+[1
+ 1
+ i]
+</div>
+
+<p>计算 Ax：</p>
+
+<div class="formula">
+Ax =
+[ 1·1 + 0·1 + i·i,
+  0·1 + 1·1 + 2·i,
+  (-i)·1 + 2·1 + 5·i ]
+</div>
+
+<p>逐项计算：</p>
+
+<div class="formula">
+第一项：
+
+1 + i²
+= 1 - 1
+= 0
+
+第二项：
+
+1 + 2i
+
+第三项：
+
+-i + 2 + 5i
+= 2 + 4i
+</div>
+
+因此：
+
+<div class="formula">
+Ax =
+[0,
+ 1+2i,
+ 2+4i]^T
+</div>
+
+<p>计算二范数：</p>
+
+<div class="formula">
+‖Ax‖₂
+= √( |0|² + |1+2i|² + |2+4i|² )
+
+= √(0 + 5 + 20)
+
+= √25
+
+= 5
+</div>
+
+<p>计算矩阵 1-范数：</p>
+
+<div class="formula">
+第1列：
+
+|1| + |0| + |-i|
+= 2
+
+第2列：
+
+|0| + |1| + |2|
+= 3
+
+第3列：
+
+|i| + |2| + |5|
+= 8
+</div>
+
+因此：
+
+<div class="formula">
+‖A‖₁ = 8
+</div>
+
+<p>计算矩阵 ∞-范数：</p>
+
+<div class="formula">
+第1行：
+
+|1| + |0| + |i|
+= 2
+
+第2行：
+
+|0| + |1| + |2|
+= 3
+
+第3行：
+
+|-i| + |2| + |5|
+= 8
+</div>
+
+因此：
+
+<div class="formula">
+‖A‖∞ = 8
+</div>
+
+<div class="note">
+考察知识点：
+<ul>
+<li>复矩阵运算</li>
+<li>复向量二范数</li>
+<li>矩阵1范数</li>
+<li>矩阵∞范数</li>
+<li>Hermite矩阵</li>
+</ul>
+
+易错点：
+<ul>
+<li>忽略 i² = -1</li>
+<li>复数模平方计算错误</li>
+<li>1范数与∞范数混淆</li>
+</ul>
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第2题</h3>
+
+<div class="formula">
+A = (1/10)
+[ [1,2],
+  [8,1] ]
+</div>
+
+<div class="answer">
+答案：
+
+{A^k} 收敛，并且
+
+A^k → O
+</div>
+
+<h4>详细解答</h4>
+
+<p>设</p>
+
+<div class="formula">
+B =
+[ [1,2],
+  [8,1] ]
+</div>
+
+<p>则 A = (1/10)B。</p>
+
+<p>求 B 的特征值：</p>
+
+<div class="formula">
+det(λI-B)
+
+= (λ-1)² -16
+
+= λ² -2λ -15
+
+= (λ-5)(λ+3)
+</div>
+
+因此 B 的特征值为：
+
+<div class="formula">
+λ1 = 5
+λ2 = -3
+</div>
+
+于是 A 的特征值为：
+
+<div class="formula">
+1/2 与 -3/10
+</div>
+
+谱半径：
+
+<div class="formula">
+ρ(A)=1/2&lt;1
+</div>
+
+因此：
+
+<div class="formula">
+A^k → O
+</div>
+
+<div class="note">
+考察知识点：
+<ul>
+<li>矩阵幂收敛</li>
+<li>谱半径</li>
+<li>特征值判定</li>
+</ul>
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第3题</h3>
+
+<div class="formula">
+A =
+[ [1,2,0],
+  [2,1,3],
+  [0,2,1] ]
+</div>
+
+<div class="answer">
+答案：
+
+A 不可约
+</div>
+
+<h4>详细解答</h4>
+
+<p>
+构造有向图：
+</p>
+
+<ul>
+<li>1 ↔ 2</li>
+<li>2 ↔ 3</li>
+</ul>
+
+<p>
+因此：
+</p>
+
+<ul>
+<li>1 可达 3</li>
+<li>3 可达 1</li>
+</ul>
+
+<p>
+图强连通，因此矩阵不可约。
+</p>
+
+<div class="note">
+考察知识点：
+<ul>
+<li>不可约矩阵</li>
+<li>有向图强连通</li>
+</ul>
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第4题</h3>
+
+<div class="formula">
+R(x)= (x^T A^T A x)/(x^Tx)
+</div>
+
+<div class="answer">
+答案：
+
+max R(x)=σ₁²
+</div>
+
+<h4>详细解答</h4>
+
+<p>
+由于：
+</p>
+
+<div class="formula">
+A^TA
+</div>
+
+<p>
+为半正定矩阵，其特征值为：
+</p>
+
+<div class="formula">
+σ1²,σ2²,...,σn²
+</div>
+
+<p>
+由 Rayleigh 商性质：
+</p>
+
+<div class="formula">
+max R(x)=λmax(A^TA)=σ1²
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第5题</h3>
+
+<div class="formula">
+[f,g]=∫₀¹ f(t)g(t)dt
+</div>
+
+<div class="answer">
+答案：
+
+G=
+[ [1,1/2,1/3],
+  [1/2,1/3,1/4],
+  [1/3,1/4,1/5] ]
+</div>
+
+<h4>详细解答</h4>
+
+<div class="formula">
+[1,1]=1
+
+[1,t]=∫₀¹ tdt=1/2
+
+[1,t²]=1/3
+
+[t,t]=1/3
+
+[t,t²]=1/4
+
+[t²,t²]=1/5
+</div>
+
+因此得到 Gram 矩阵：
+
+<div class="formula">
+G=
+[ [1,1/2,1/3],
+  [1/2,1/3,1/4],
+  [1/3,1/4,1/5] ]
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第6题</h3>
+
+<div class="formula">
+x=(x1,x2,...,xn)^T
+</div>
+
+<div class="answer">
+答案：
+
+d(x^T)/dx = In
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第7题</h3>
+
+<div class="formula">
+A=
+[ [1,1,1,1],
+  [1,1,1,1] ]
+</div>
+
+<div class="answer">
+答案：
+
+X=(1/8)
+[ [1,1],
+  [1,1],
+  [1,1],
+  [1,1] ]
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第8题</h3>
+
+<div class="formula">
+V={A | A^T=-A}
+</div>
+
+<div class="answer">
+答案：
+
+一般情形下不是子空间。
+
+只有 m=n 时，
+反对称矩阵集合才构成子空间。
+</div>
+
+</div>
+
+<h2>二、计算题</h2>
+
+<div class="box">
+
+<h3>第1题</h3>
+
+<p>
+已知向量组的度量矩阵：
+</p>
+
+<div class="formula">
+Gα=
+[ [1,-1,0],
+  [-1,2,-1],
+  [0,-1,1] ]
+</div>
+
+<div class="answer">
+最终答案：
+
+Ge=
+[ [1/4,-1/4,-1/2],
+  [-1/4,5/4,1/2],
+  [-1/2,1/2,1] ]
+
+[u,v]=9/4
+</div>
+
+<h4>详细解答</h4>
+
+<p>构造过渡矩阵：</p>
+
+<div class="formula">
+P=
+[ [1,1,0],
+  [1,-1,0],
+  [0,0,1] ]
+</div>
+
+<p>计算逆矩阵：</p>
+
+<div class="formula">
+P⁻¹=
+[ [1/2,1/2,0],
+  [1/2,-1/2,0],
+  [0,0,1] ]
+</div>
+
+<p>利用度量矩阵变换公式：</p>
+
+<div class="formula">
+Ge=P^{-T}GαP^{-1}
+</div>
+
+得到：
+
+<div class="formula">
+Ge=
+[ [1/4,-1/4,-1/2],
+  [-1/4,5/4,1/2],
+  [-1/2,1/2,1] ]
+</div>
+
+随后：
+
+<div class="formula">
+[u,v]=u^TGev
+</div>
+
+最终得到：
+
+<div class="formula">
+[u,v]=9/4
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第2题 Jordan标准形</h3>
+
+<div class="formula">
+A=
+[ [1,0,1],
+  [1,1,2],
+  [0,0,3] ]
+</div>
+
+<div class="answer">
+答案：
+
+J=
+[ [1,1,0],
+  [0,1,0],
+  [0,0,3] ]
+</div>
+
+<h4>详细解答</h4>
+
+<p>
+由于 A 为上三角矩阵，
+因此特征值为：
+</p>
+
+<div class="formula">
+1,1,3
+</div>
+
+<p>
+计算：
+</p>
+
+<div class="formula">
+A-I
+</div>
+
+<p>
+零空间维数为1，
+因此 λ=1 的几何重数为1。
+</p>
+
+<p>
+所以对应一个2阶Jordan块。
+</p>
+
+</div>
+
+<div class="box">
+
+<h3>第3题 求 e^{At}</h3>
+
+<div class="answer">
+答案：
+
+e^{At}=I+tA+(e^t-1-t)A²
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第4题 QR分解</h3>
+
+<div class="answer">
+答案：
+
+A=QR
+</div>
+
+<div class="formula">
+R=
+[ [√5,2,0],
+  [0,√10,3],
+  [0,0,1] ]
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第5题 Gerschgorin圆盘</h3>
+
+<div class="answer">
+答案：
+
+D1={|z-100i|≤30}
+
+D2={|z-200|≤58}
+
+D3={|z-100|≤50}
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第6题 广义逆矩阵</h3>
+
+<div class="answer">
+答案：
+
+x0=
+[2/11,
+ 2/11,
+ 2/11,
+ 2/11]^T
+</div>
+
+</div>
+
+<h2>三、证明题</h2>
+
+<div class="box">
+
+<h3>第1题</h3>
+
+<div class="answer">
+证明：
+
+利用 Cayley-Hamilton 定理：
+
+A³-A²-A+E=0
+
+即：
+
+A³=A²+A-E
+</div>
+
+<p>
+然后利用数学归纳法即可证明：
+</p>
+
+<div class="formula">
+A^n=A^{n-2}+A²-E
+</div>
+
+</div>
+
+<div class="box">
+
+<h3>第2题</h3>
+
+<div class="answer">
+证明：
+
+AA⁻¹=E
+</div>
+
+<p>由矩阵范数次乘性：</p>
+
+<div class="formula">
+‖E‖=‖AA⁻¹‖≤‖A‖·‖A⁻¹‖
+</div>
+
+因此：
+
+<div class="formula">
+1≤‖A‖·‖A⁻¹‖
+</div>
+
+于是：
+
+<div class="formula">
+‖A⁻¹‖≥1/‖A‖
+</div>
+
+</div>
+
+<h2>最终总结</h2>
+
+<div class="box">
+
+<table>
+<tr>
+<th>模块</th>
+<th>核心知识点</th>
+</tr>
+
+<tr>
+<td>矩阵范数</td>
+<td>1范数、∞范数、2范数</td>
+</tr>
+
+<tr>
+<td>矩阵收敛</td>
+<td>谱半径判定</td>
+</tr>
+
+<tr>
+<td>Jordan标准形</td>
+<td>代数重数与几何重数</td>
+</tr>
+
+<tr>
+<td>矩阵函数</td>
+<td>Cayley-Hamilton定理</td>
+</tr>
+
+<tr>
+<td>QR分解</td>
+<td>Givens变换</td>
+</tr>
+
+<tr>
+<td>广义逆</td>
+<td>Moore-Penrose逆</td>
+</tr>
+
+<tr>
+<td>最优化</td>
+<td>最小二乘与极小范数解</td>
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>

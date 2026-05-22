@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《矩阵论》模拟考试题及分步解答</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fcfcfc;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            border-bottom: 1px dashed #bdc3c7;
+            padding-bottom: 5px;
+        }
+        .question-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #34495e;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .knowledge-point {
+            display: inline-block;
+            background-color: #e8f4f8;
+            color: #0077b6;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            border: 1px solid #bde0fe;
+        }
+        .solution-box {
+            background-color: #ffffff;
+            border: 1px solid #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+        }
+        .step {
+            margin-bottom: 15px;
+        }
+        .answer {
+            color: #d35400;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>《矩阵论》模拟考试题及分步解答</h1>
+
+    <h2>一、填空题 (共24分,每小题3分)</h2>
+
+    <div class="question-box">
+        <div class="question-text">
+            1. 设 $A=\begin{pmatrix}1&0&i\\ 0&1&2\\ -i&2&5\end{pmatrix}, x=(1, 1, i)^T$, 求 $||Ax||_{2}=\_$, $||A||_{1}=\_$, $||A||_{\infty}=\_$。 
+            (注：依据矩阵维度，修正向量 x 补全维度；符号题意统一按最大行模和范数解析)
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：向量与矩阵的范数计算</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            第一步，计算矩阵与向量的乘积 $Ax$：<br>
+            $$ Ax = \begin{pmatrix} 1 & 0 & i \\ 0 & 1 & 2 \\ -i & 2 & 5 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ i \end{pmatrix} = \begin{pmatrix} 1 + i^2 \\ 1 + 2i \\ -i + 2 + 5i \end{pmatrix} = \begin{pmatrix} 0 \\ 1+2i \\ 2+4i \end{pmatrix} $$
+        </div>
+        <div class="step">
+            第二步，计算向量的 2-范数 $||Ax||_2$（各分量模长的平方和开根号）：<br>
+            $$ ||Ax||_2 = \sqrt{|0|^2 + |1+2i|^2 + |2+4i|^2} = \sqrt{0 + (1^2+2^2) + (2^2+4^2)} = \sqrt{5 + 20} = 5 $$
+        </div>
+        <div class="step">
+            第三步，计算矩阵的列模和范数 $||A||_1 = \max_j \sum_{i} |a_{ij}|$：<br>
+            三列元素的绝对值之和分别为：$1+0+|-i|=2$, $0+1+2=3$, $|i|+2+5=8$。最大值为 8。
+        </div>
+        <div class="step">
+            第四步，计算矩阵的行模和范数 $||A||_{\infty} = \max_i \sum_{j} |a_{ij}|$：<br>
+            由于 $A$ 是 Hermite 阵（对称），行模和最大值同样为 8。
+        </div>
+        <div class="answer">最终答案：5 ； 8 ； 8</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            2. 设 $A=\frac{1}{10}\begin{pmatrix}1&2\\ 8&1\end{pmatrix}$。则 $\{A^{k}\}$ 是否收敛？
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：矩阵序列的收敛性与谱半径</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            矩阵序列 $A^k \to 0$ 收敛的充要条件是其谱半径（最大特征值的绝对值） $\rho(A) &lt; 1$。<br>
+            计算 $A$ 的特征多项式：<br>
+            $$ |\lambda I - A| = \begin{vmatrix} \lambda - 0.1 & -0.2 \\ -0.8 & \lambda - 0.1 \end{vmatrix} = (\lambda - 0.1)^2 - 0.16 = 0 $$
+            解得：$\lambda - 0.1 = \pm 0.4$。<br>
+            特征值为 $\lambda_1 = 0.5$, $\lambda_2 = -0.3$。<br>
+            谱半径 $\rho(A) = \max(|0.5|, |-0.3|) = 0.5 &lt; 1$。因此，序列收敛于零矩阵。
+        </div>
+        <div class="answer">最终答案：收敛（且收敛于零矩阵）</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            3. 判断矩阵 $\begin{pmatrix}1&2&0\\ 2&1&3\\ 0&2&1\end{pmatrix}$ 是否可约？
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：非负矩阵的不可约性与有向图</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            将矩阵视作有向图的邻接矩阵：<br>
+            节点 1 与 2 之间有双向边（$a_{12} \neq 0, a_{21} \neq 0$）；<br>
+            节点 2 与 3 之间有双向边（$a_{23} \neq 0, a_{32} \neq 0$）。<br>
+            图的连通路径为 $1 \leftrightarrow 2 \leftrightarrow 3$。由于所有节点互相强连通（任意两个节点相互可达），因此该矩阵是不可约的。
+        </div>
+        <div class="answer">最终答案：不可约</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            4. 设 $A\in R^{m\times n}$ 的奇异值为 $\sigma_{1}\ge\sigma_{2}\ge \dots \ge\sigma_{n}$, $R(x)=\frac{x^{\top}A^{\top}Ax}{x^{\top}x}(x\ne0)$ ,则 $max_{x\ne0}R(x)=$ 
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：瑞利商 (Rayleigh Quotient) 与奇异值的关系</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            表达式 $R(x)$ 为实对称矩阵 $A^T A$ 的瑞利商。瑞利商的极值性质表明，其最大值等于矩阵 $A^T A$ 的最大特征值。<br>
+            根据奇异值的定义，$A$ 的奇异值 $\sigma_i$ 是 $A^T A$ 的特征值的算术平方根，即 $\lambda_i(A^T A) = \sigma_i^2$。<br>
+            因此，最大特征值为 $\sigma_1^2$。
+        </div>
+        <div class="answer">最终答案：$\sigma_1^2$</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            5. 设欧式空间 $P[t]_{2}$ 中的内积为 $[f,g]=\int_{0}^{1}f(t)g(t)d~t$，则基 $1,t,t^{2}$ 的度量矩阵为\_ 
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：内积空间的度量矩阵（Gram矩阵）</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            令基底为 $g_1=1, g_2=t, g_3=t^2$。度量矩阵 $G$ 的元素 $a_{ij} = [g_i, g_j]$。<br>
+            $$ a_{ij} = \int_{0}^{1} t^{i-1} \cdot t^{j-1} dt = \int_{0}^{1} t^{i+j-2} dt = \left[ \frac{1}{i+j-1} t^{i+j-1} \right]_0^1 = \frac{1}{i+j-1} $$
+            将 $i, j \in \{1, 2, 3\}$ 依次代入：<br>
+            第一行：$a_{11}=1, a_{12}=1/2, a_{13}=1/3$<br>
+            第二行：$a_{21}=1/2, a_{22}=1/3, a_{23}=1/4$<br>
+            第三行：$a_{31}=1/3, a_{32}=1/4, a_{33}=1/5$
+        </div>
+        <div class="answer">最终答案：$\begin{pmatrix} 1 & 1/2 & 1/3 \\ 1/2 & 1/3 & 1/4 \\ 1/3 & 1/4 & 1/5 \end{pmatrix}$</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            6. 设 $x=(x_{1},x_{2},\dots,x_{n})^{T}\in R^{n}$,求 $\frac{d~x^{T}}{d~x}=$ 
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：矩阵向量微分</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            向量对自身求导，依据分母布局或分子布局，结果为一个单位矩阵。$\frac{\partial x_i}{\partial x_j} = 1$ (当 $i=j$ 时)，否则为 0。
+        </div>
+        <div class="answer">最终答案：$I$（或单位矩阵 $E$）</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            7. 设 $A=\begin{pmatrix}1&1&1&1\\ 1&1&1&1\end{pmatrix}$ 则的一个自反减号逆为\_
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：广义逆矩阵 (自反广义逆即 {1,2}-逆)</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            对矩阵做秩为1的满秩分解：$A = \begin{pmatrix} 1 \\ 1 \end{pmatrix} \begin{pmatrix} 1 & 1 & 1 & 1 \end{pmatrix} = FG$。<br>
+            根据满秩分解求 M-P 广义逆公式（M-P逆本身必是自反减号逆）：<br>
+            $$ A^+ = G^T(GG^T)^{-1}(F^T F)^{-1}F^T $$
+            $F^T F = 1^2+1^2=2 \implies (F^T F)^{-1} = 1/2$<br>
+            $GG^T = 1^2+1^2+1^2+1^2=4 \implies (GG^T)^{-1} = 1/4$<br>
+            $$ A^+ = \begin{pmatrix} 1\\1\\1\\1 \end{pmatrix} \left(\frac{1}{4}\right) \left(\frac{1}{2}\right) \begin{pmatrix} 1&1 \end{pmatrix} = \frac{1}{8} \begin{pmatrix} 1&1 \\ 1&1 \\ 1&1 \\ 1&1 \end{pmatrix} $$
+        </div>
+        <div class="answer">最终答案：$\frac{1}{8} \begin{pmatrix} 1&1 \\ 1&1 \\ 1&1 \\ 1&1 \end{pmatrix}$</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            8. 线性空间 $R^{m\times n}(n &gt; 1)$ 的子集 $V=\{A|A^{T}=-A,A\in R^{m\times n}\}$ 是否是 $R^{m\times n}$ 的子空间\_
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：线性子空间的判定</div>
+        <div class="step">
+            <strong>【解题逻辑与推导】</strong><br>
+            判断是否为子空间只需验证对加法和数乘封闭：<br>
+            对任意实数 $k$ 以及 $A, B \in V$，检查 $kA+B$ 是否属于 $V$：<br>
+            $ (kA+B)^T = kA^T + B^T = k(-A) + (-B) = -(kA+B) $。<br>
+            满足反称性条件，因此是子空间（反交换矩阵空间）。
+        </div>
+        <div class="answer">最终答案：是</div>
+    </div>
+
+
+    <h2>二、计算题(共60分,每小题10分)</h2>
+
+    <div class="question-box">
+        <div class="question-text">
+            1. 设向量组 $\alpha_{1}=\begin{pmatrix}1\\ 1\\ 0\end{pmatrix}, \alpha_{2}=\begin{pmatrix}1\\ -1\\ 0\end{pmatrix}, \alpha_{3}=\begin{pmatrix}0\\ 0\\ 1\end{pmatrix}$ 的度量矩阵为 $G=\begin{pmatrix}1&-1&0\\ -1&2&-1\\ 0&-1&1\end{pmatrix}$。<br>
+            (1)求 $e_{1}=\begin{pmatrix}1\\ 0\\ 0\end{pmatrix}, e_{2}=\begin{pmatrix}0\\ 1\\ 0\end{pmatrix}, e_{3}=\begin{pmatrix}0\\ 0\\ 1\end{pmatrix}$ 的度量矩阵；<br>
+            (2)求向量 $\alpha=\begin{pmatrix}1\\ 2\\ 1\end{pmatrix}$ 与 $\beta=\begin{pmatrix}-1\\ 0\\ 1\end{pmatrix}$ 的内积。
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：基变换与度量矩阵（Gram矩阵）的坐标变换公式</div>
+        <div class="step">
+            <strong>【解答：第 (1) 问】</strong><br>
+            设旧基为 $B_1 = (\alpha_1, \alpha_2, \alpha_3) = \begin{pmatrix} 1 & 1 & 0 \\ 1 & -1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$。<br>
+            新基为标准基 $B_2 = (e_1, e_2, e_3) = I$。<br>
+            设过渡矩阵为 $C$，有 $B_2 = B_1 C$，因此 $C = B_1^{-1}$。<br>
+            求逆得到：<br>
+            $$ C = \begin{pmatrix} 1 & 1 & 0 \\ 1 & -1 & 0 \\ 0 & 0 & 1 \end{pmatrix}^{-1} = \begin{pmatrix} 1/2 & 1/2 & 0 \\ 1/2 & -1/2 & 0 \\ 0 & 0 & 1 \end{pmatrix} $$
+            新基下的度量矩阵 $G_e = C^T G C$：<br>
+            先算 $GC = \begin{pmatrix} 1 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 1 \end{pmatrix} \begin{pmatrix} 1/2 & 1/2 & 0 \\ 1/2 & -1/2 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 1 & 0 \\ 1/2 & -3/2 & -1 \\ -1/2 & 1/2 & 1 \end{pmatrix}$ <br>
+            再算 $C^T(GC) = \begin{pmatrix} 1/2 & 1/2 & 0 \\ 1/2 & -1/2 & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1/2 & -3/2 & -1 \\ -1/2 & 1/2 & 1 \end{pmatrix} = \begin{pmatrix} 1/4 & -1/4 & -1/2 \\ -1/4 & 5/4 & 1/2 \\ -1/2 & 1/2 & 1 \end{pmatrix}$
+        </div>
+        <div class="step">
+            <strong>【解答：第 (2) 问】</strong><br>
+            在标准基下，向量 $\alpha, \beta$ 对应的坐标即为其本身：$x = (1,2,1)^T$, $y = (-1,0,1)^T$。<br>
+            内积 $[\alpha, \beta] = x^T G_e y$。<br>
+            $$ x^T G_e y = \begin{pmatrix} 1 & 2 & 1 \end{pmatrix} \begin{pmatrix} 1/4 & -1/4 & -1/2 \\ -1/4 & 5/4 & 1/2 \\ -1/2 & 1/2 & 1 \end{pmatrix} \begin{pmatrix} -1 \\ 0 \\ 1 \end{pmatrix} $$
+            先算矩阵乘列向量 $y$：<br>
+            $$ G_e y = \begin{pmatrix} -1/4 - 1/2 \\ 1/4 + 1/2 \\ 1/2 + 1 \end{pmatrix} = \begin{pmatrix} -3/4 \\ 3/4 \\ 3/2 \end{pmatrix} $$
+            再与行向量 $x^T$ 相乘：<br>
+            $$ [\alpha, \beta] = \begin{pmatrix} 1 & 2 & 1 \end{pmatrix} \begin{pmatrix} -3/4 \\ 3/4 \\ 3/2 \end{pmatrix} = -1 \cdot \frac{3}{4} + 2 \cdot \frac{3}{4} + 1 \cdot \frac{3}{2} = \frac{3}{4} + \frac{6}{4} = \frac{9}{4} $$
+        </div>
+        <div class="answer">最终答案：(1) 度量矩阵如上所示；(2) 内积为 9/4。</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            2. 求 $A=\begin{pmatrix}1&0&1\\ 1&1&2\\ 0&0&3\end{pmatrix}$ 的Jordan 标准型。 
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：特征多项式、代数重数与几何重数、Jordan标准形构造</div>
+        <div class="step">
+            <strong>【解答步骤】</strong><br>
+            <strong>步骤一：求特征多项式及特征值。</strong><br>
+            $$ |\lambda I - A| = \begin{vmatrix} \lambda-1 & 0 & -1 \\ -1 & \lambda-1 & -2 \\ 0 & 0 & \lambda-3 \end{vmatrix} = (\lambda-3) \cdot (\lambda-1)^2 = 0 $$
+            得到特征值：$\lambda_1 = \lambda_2 = 1$ (代数重数为 2)， $\lambda_3 = 3$ (代数重数为 1)。
+        </div>
+        <div class="step">
+            <strong>步骤二：判定 Jordan 块的大小（计算几何重数）。</strong><br>
+            对于 $\lambda = 1$，计算矩阵 $A - I$：<br>
+            $$ A - I = \begin{pmatrix} 0 & 0 & 1 \\ 1 & 0 & 2 \\ 0 & 0 & 2 \end{pmatrix} $$
+            显然其前两列线性无关，故秩 $r(A-I) = 2$。<br>
+            对应的特征子空间维数（即几何重数）为 $n - r(A-I) = 3 - 2 = 1$。<br>
+            这说明属于特征值 1 的 Jordan 块只有 1 个，必定是 2 阶的 $J_2(1)$。<br>
+            特征值 3 对应 1 阶的 $J_1(3)$。
+        </div>
+        <div class="step">
+            <strong>步骤三：写出 Jordan 标准型。</strong>
+            $$ J = \begin{pmatrix} 1 & 1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 3 \end{pmatrix} $$
+        </div>
+        <div class="answer">最终答案：$J = \begin{pmatrix} 1 & 1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 3 \end{pmatrix}$</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            3. 已知 $A=\begin{pmatrix}-2&1&0\\ -4&2&0\\ 1&0&1\end{pmatrix}$，用待定系数法求 $e^{At}$。
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：矩阵函数的求解、特征多项式降次与待定系数法</div>
+        <div class="step">
+            <strong>【解答步骤】</strong><br>
+            <strong>步骤一：求矩阵 $A$ 的特征值。</strong><br>
+            $$ |\lambda I - A| = \begin{vmatrix} \lambda+2 & -1 & 0 \\ 4 & \lambda-2 & 0 \\ -1 & 0 & \lambda-1 \end{vmatrix} = (\lambda-1)[(\lambda+2)(\lambda-2) - (-4)] = \lambda^2(\lambda-1) = 0 $$
+            特征值为重根 $\lambda_1 = \lambda_2 = 0$，及单根 $\lambda_3 = 1$。
+        </div>
+        <div class="step">
+            <strong>步骤二：构建待定系数方程组。</strong><br>
+            由凯莱-哈密顿定理，待求矩阵函数可表示为不超过2次的多项式：$e^{At} = c_0 I + c_1 A + c_2 A^2$。<br>
+            令 $f(\lambda) = e^{\lambda t}$，$P(\lambda) = c_0 + c_1 \lambda + c_2 \lambda^2$。它们在谱上取值相等：<br>
+            对单根 $\lambda = 1$: $e^t = c_0 + c_1 + c_2$ （式1）<br>
+            对重根 $\lambda = 0$: $e^0 = 1 = c_0$ （式2）<br>
+            对重根的导数 ($f'(\lambda) = t e^{\lambda t}$, $P'(\lambda) = c_1 + 2c_2\lambda$): 代入 $\lambda=0$ 得 $t = c_1$ （式3）<br>
+            解得方程组：$c_0 = 1$，$c_1 = t$，$c_2 = e^t - t - 1$。
+        </div>
+        <div class="step">
+            <strong>步骤三：计算 $A^2$ 并代入组合。</strong><br>
+            $$ A^2 = \begin{pmatrix} -2&1&0\\ -4&2&0\\ 1&0&1 \end{pmatrix} \begin{pmatrix} -2&1&0\\ -4&2&0\\ 1&0&1 \end{pmatrix} = \begin{pmatrix} 0&0&0\\ 0&0&0\\ -1&1&1 \end{pmatrix} $$
+            所以，
+            $$ e^{At} = 1 \cdot I + t \cdot A + (e^t - t - 1) \cdot A^2 $$
+            $$ = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} + \begin{pmatrix} -2t & t & 0 \\ -4t & 2t & 0 \\ t & 0 & t \end{pmatrix} + \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 1+t-e^t & e^t-t-1 & e^t-t-1 \end{pmatrix} $$
+            合并矩阵即得最终结果。
+        </div>
+        <div class="answer">
+            最终答案：
+            $ e^{At} = \begin{pmatrix} 1-2t & t & 0 \\ -4t & 1+2t & 0 \\ 1+2t-e^t & e^t-t-1 & e^t \end{pmatrix} $
+        </div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            4. 用 Givens 变换求 $A=\begin{pmatrix}2&\sqrt{5}&0\\ 0&3&\sqrt{10}\\ 1&0&0\end{pmatrix}$ 的QR分解。
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：Givens旋转（平面旋转）构造 QR 分解</div>
+        <div class="step">
+            <strong>【解答步骤】</strong><br>
+            <strong>第一步：消去第一列底部的 1。</strong><br>
+            选取 $(1,1)$ 和 $(3,1)$ 的元素 $2$ 和 $1$ 进行 Givens 旋转。
+            旋转参数 $r = \sqrt{2^2 + 1^2} = \sqrt{5}$。<br>
+            $c = \frac{2}{\sqrt{5}}$，$s = \frac{1}{\sqrt{5}}$。<br>
+            构造旋转矩阵 $T_{13}$：<br>
+            $$ T_{13} = \begin{pmatrix} 2/\sqrt{5} & 0 & 1/\sqrt{5} \\ 0 & 1 & 0 \\ -1/\sqrt{5} & 0 & 2/\sqrt{5} \end{pmatrix} $$
+            $$ R_1 = T_{13} A = \begin{pmatrix} \sqrt{5} & 2 & 0 \\ 0 & 3 & \sqrt{10} \\ 0 & -1 & 0 \end{pmatrix} $$
+        </div>
+        <div class="step">
+            <strong>第二步：消去新矩阵第二列底部的 -1。</strong><br>
+            选取主元 $3$ 消除 $-1$。<br>
+            参数 $r' = \sqrt{3^2 + (-1)^2} = \sqrt{10}$。<br>
+            $c' = \frac{3}{\sqrt{10}}$，$s' = \frac{-1}{\sqrt{10}}$。<br>
+            构造 $T_{23}$：<br>
+            $$ T_{23} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 3/\sqrt{10} & -1/\sqrt{10} \\ 0 & 1/\sqrt{10} & 3/\sqrt{10} \end{pmatrix} $$
+            $$ R = T_{23} R_1 = \begin{pmatrix} \sqrt{5} & 2 & 0 \\ 0 & \sqrt{10} & 3 \\ 0 & 0 & 1 \end{pmatrix} $$
+            此时 $R$ 已是上三角矩阵。
+        </div>
+        <div class="step">
+            <strong>第三步：求正交矩阵 Q。</strong><br>
+            $Q = (T_{23} T_{13})^{-1} = T_{13}^T T_{23}^T$ （正交阵的逆等于转置）。<br>
+            通过矩阵乘法：
+            $$ Q = \begin{pmatrix} \frac{2}{\sqrt{5}} & \frac{1}{\sqrt{50}} & -\frac{3}{\sqrt{50}} \\ 0 & \frac{3}{\sqrt{10}} & \frac{1}{\sqrt{10}} \\ \frac{1}{\sqrt{5}} & -\frac{2}{\sqrt{50}} & \frac{6}{\sqrt{50}} \end{pmatrix} $$
+        </div>
+        <div class="answer">最终答案：$A=QR$，Q与R如上所示（$\sqrt{50}$可化简为$5\sqrt{2}$）。</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            5. 应用 Gerschgorin 圆盘定理隔离矩阵 $A=\begin{pmatrix}100i&10&20\\ 8&200&50\\ 10&40&100\end{pmatrix}$ 的特征值。 
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：Gerschgorin 盖尔圆盘定理（行圆盘与列圆盘交叉定位精细隔离）</div>
+        <div class="step">
+            <strong>【解答步骤】</strong><br>
+            圆心为对角线元素，半径为非主对角元素绝对值之和。<br>
+            <strong>行圆盘集：</strong><br>
+            $R_1: |z - 100i| \le |10| + |20| = 30$<br>
+            $R_2: |z - 200| \le |8| + |50| = 58$<br>
+            $R_3: |z - 100| \le |10| + |40| = 50$<br>
+            <br>
+            <strong>列圆盘集：</strong><br>
+            $C_1: |z - 100i| \le |8| + |10| = 18$<br>
+            $C_2: |z - 200| \le |10| + |40| = 50$<br>
+            $C_3: |z - 100| \le |20| + |50| = 70$<br>
+            <br>
+            特征值必定在行圆盘并集与列圆盘并集的交集中。我们将相同圆心的圆盘取交集（即半径取小者）：<br>
+            对于 100i 中心：$D_1: |z - 100i| \le \min(30, 18) \implies |z - 100i| \le 18$<br>
+            对于 200 中心：$D_2: |z - 200| \le \min(58, 50) \implies |z - 200| \le 50$<br>
+            对于 100 中心：$D_3: |z - 100| \le \min(50, 70) \implies |z - 100| \le 50$<br>
+            <br>
+            验证圆盘隔离性：圆心距离 $|100i-200| \approx 223 &gt; 18+50$， $|100i-100| \approx 141 &gt; 18+50$， $|200-100| = 100 \ge 50+50$。三个圆盘互不相交（边界最多相切，连通域独立）。
+        </div>
+        <div class="answer">最终答案：特征值被隔离在以下三个互不相交的闭圆盘中：<br> $|z - 100i| \le 18$ ； $|z - 200| \le 50$ ； $|z - 100| \le 50$。</div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            6. 已知 $A=\begin{pmatrix}1&2&2&1\\ 1&1&1&1\\ 2&1&1&2\end{pmatrix}$, $b=\begin{pmatrix}1\\ 1\\ 1\end{pmatrix}$。<br>
+            (1) 求 A 的满秩分解; (2) 求 $A^{+}$; (3) 求线性方程组 $Ax=b$ 的极小范数最小二乘解 $x_{0}$。
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：矩阵满秩分解，Moore-Penrose广义逆，极小范数最小二乘解</div>
+        <div class="step">
+            <strong>【解答：第 (1) 问】 满秩分解</strong><br>
+            对 $A$ 进行初等行变换化为行最简形：<br>
+            $$ A \to \begin{pmatrix} 1&2&2&1\\ 0&-1&-1&0\\ 0&-3&-3&0 \end{pmatrix} \to \begin{pmatrix} 1&0&0&1\\ 0&1&1&0\\ 0&0&0&0 \end{pmatrix} $$
+            秩为 2。取 $A$ 的前2列作为列满秩矩阵 $F$，最简形前2行作为行满秩矩阵 $G$：<br>
+            $$ F = \begin{pmatrix} 1&2\\ 1&1\\ 2&1 \end{pmatrix} , \quad G = \begin{pmatrix} 1&0&0&1\\ 0&1&1&0 \end{pmatrix} $$
+        </div>
+        <div class="step">
+            <strong>【解答：第 (2) 问】 求 $A^+$</strong><br>
+            公式：$A^+ = G^T (G G^T)^{-1} (F^T F)^{-1} F^T$<br>
+            $GG^T = \begin{pmatrix} 2&0\\ 0&2 \end{pmatrix} \implies (GG^T)^{-1} = \begin{pmatrix} 1/2 & 0 \\ 0 & 1/2 \end{pmatrix}$<br>
+            $F^TF = \begin{pmatrix} 6&5\\ 5&6 \end{pmatrix} \implies (F^TF)^{-1} = \frac{1}{11} \begin{pmatrix} 6&-5\\ -5&6 \end{pmatrix}$<br>
+            连乘展开计算得到：<br>
+            $$ A^+ = \frac{1}{22} \begin{pmatrix} -4&1&7\\ 7&1&-4\\ 7&1&-4\\ -4&1&7 \end{pmatrix} $$
+        </div>
+        <div class="step">
+            <strong>【解答：第 (3) 问】 极小范数解</strong><br>
+            公式求解：$x_0 = A^+ b$<br>
+            $$ x_0 = \frac{1}{22} \begin{pmatrix} -4&1&7\\ 7&1&-4\\ 7&1&-4\\ -4&1&7 \end{pmatrix} \begin{pmatrix} 1\\ 1\\ 1 \end{pmatrix} = \frac{1}{22} \begin{pmatrix} 4\\ 4\\ 4\\ 4 \end{pmatrix} = \begin{pmatrix} 2/11 \\ 2/11 \\ 2/11 \\ 2/11 \end{pmatrix} $$
+        </div>
+        <div class="answer">最终答案：见上述每步结尾的矩阵与向量结果。</div>
+    </div>
+
+
+    <h2>三、证明题(共16分,每小题8分)</h2>
+
+    <div class="question-box">
+        <div class="question-text">
+            1. 设矩阵 $A=\begin{pmatrix}1&0&0\\ 1&0&1\\ 0&1&0\end{pmatrix}$，证明: $A^{n}=A^{n-2}+A^{2}-E,(n\ge3)$。
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：Cayley-Hamilton 凯莱-哈密顿定理、数学归纳法</div>
+        <div class="step">
+            <strong>【证明链条】</strong><br>
+            第一步，求特征多项式：<br>
+            $$ |\lambda I - A| = \begin{vmatrix} \lambda-1 & 0 & 0 \\ -1 & \lambda & -1 \\ 0 & -1 & \lambda \end{vmatrix} = (\lambda-1)(\lambda^2 - 1) = \lambda^3 - \lambda^2 - \lambda + 1 $$
+        </div>
+        <div class="step">
+            第二步，应用凯莱-哈密顿定理（矩阵满足自身特征方程）：<br>
+            $$ A^3 - A^2 - A + E = O \implies A^3 = A^2 + A - E $$
+            这说明当 $n=3$ 时，$A^3 = A^{3-2} + A^2 - E$，命题成立。
+        </div>
+        <div class="step">
+            第三步，使用数学归纳法递推证明：<br>
+            假设当 $n=k$ ($k \ge 3$) 时命题成立，即 $A^k = A^{k-2} + A^2 - E$。<br>
+            当 $n=k+1$ 时，两边同乘矩阵 $A$：<br>
+            $$ A^{k+1} = A \cdot A^k = A(A^{k-2} + A^2 - E) = A^{k-1} + A^3 - A $$
+            将 $n=3$ 得到的基本关系式 $A^3 = A^2 + A - E$ 代入：<br>
+            $$ A^{k+1} = A^{k-1} + (A^2 + A - E) - A = A^{k-1} + A^2 - E $$
+            由此可见，当 $n=k+1$ 时命题依然成立。<br>
+            综合上述，原命题得证。
+        </div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-text">
+            2. 若 $A$ 可逆，证明 $||A^{-1}||\ge||A||^{-1}$。
+        </div>
+    </div>
+    <div class="solution-box">
+        <div class="knowledge-point">考察知识点：矩阵范数的次乘性（相容性）原理</div>
+        <div class="step">
+            <strong>【证明链条】</strong><br>
+            由定义，相容的矩阵范数满足次乘性公理：对任意方阵 X 和 Y，有 $||XY|| \le ||X|| \cdot ||Y||$。<br>
+            因为矩阵 $A$ 可逆，所以存在 $A^{-1}$，使得 $A A^{-1} = E$ （E为单位阵）。<br>
+            对该等式两边同取矩阵范数：<br>
+            $$ ||A A^{-1}|| = ||E|| $$
+            利用次乘性原理，我们将左侧放缩：<br>
+            $$ ||A|| \cdot ||A^{-1}|| \ge ||A A^{-1}|| = ||E|| $$
+            任意诱导矩阵范数（算子范数）对于单位矩阵恒有 $||E|| = 1$；一般相容范数也满足 $||E|| \ge 1$。因此必然有：<br>
+            $$ ||A|| \cdot ||A^{-1}|| \ge 1 $$
+            由于 $A$ 可逆，必定不是零矩阵，故 $||A|| &gt; 0$。<br>
+            两边同除以 $||A||$，即得：<br>
+            $$ ||A^{-1}|| \ge \frac{1}{||A||} = ||A||^{-1} $$
+            证毕。
+        </div>
+    </div>
+
+</body>
+</html>

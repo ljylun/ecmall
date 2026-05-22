@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>矩阵论模拟考试题详细解答</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f2e8;
+      --surface: #fffcf5;
+      --surface-alt: #f0ebdf;
+      --accent: #7b2d26;
+      --accent-light: #a0403a;
+      --text: #2a2520;
+      --text-muted: #6b6560;
+      --border: #d8d0c0;
+      --green: #2d6b3f;
+      --blue: #2d4a6b;
+      --gold: #8b7530;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Serif SC', 'Source Serif 4', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      padding: 0;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+    .cover {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      border-bottom: 3px double var(--border);
+      margin-bottom: 3rem;
+      animation: fadeIn 0.8s ease;
+    }
+    .cover h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+    .cover .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+      column-count: 2;
+      column-gap: 2rem;
+    }
+    .toc h3 {
+      column-span: all;
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+    .toc a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 0.15rem 0;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--accent); }
+    h2.part-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 3rem 0 1.5rem;
+      padding: 0.8rem 0 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .problem-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .problem-card:nth-child(2) { animation-delay: 0.05s; }
+    .problem-card:nth-child(3) { animation-delay: 0.1s; }
+    .problem-header {
+      background: var(--accent);
+      color: #f0ece4;
+      padding: 0.6rem 1.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .problem-header .kp {
+      float: right;
+      font-weight: 400;
+      font-size: 0.82rem;
+      opacity: 0.85;
+      background: rgba(255,255,255,0.15);
+      padding: 0.1rem 0.6rem;
+      border-radius: 3px;
+    }
+    .problem-body {
+      padding: 1.5rem;
+    }
+    .problem-statement {
+      background: var(--surface-alt);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+    }
+    .solution-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--green);
+      padding: 0.15rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+    .proof-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--blue);
+      padding: 0.15rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+    .analysis-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--gold);
+      padding: 0.15rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+    .step {
+      margin: 0.6rem 0 0.6rem 1rem;
+      padding-left: 0.8rem;
+      border-left: 2px solid var(--border);
+    }
+    .step-title {
+      font-weight: 600;
+      color: var(--accent-light);
+      font-size: 0.92rem;
+    }
+    .answer-box {
+      background: linear-gradient(135deg, #f0f6e8, #e8f0da);
+      border: 1px solid #b0c898;
+      border-radius: 4px;
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0;
+      font-weight: 600;
+    }
+    .note {
+      background: #fef8e7;
+      border-left: 3px solid var(--gold);
+      padding: 0.6rem 1rem;
+      margin: 0.8rem 0;
+      font-size: 0.9rem;
+      color: #5a4a20;
+    }
+    .katex { font-size: 1.05em; }
+    .katex-display { margin: 0.8rem 0; overflow-x: auto; }
+    p { margin: 0.5rem 0; }
+    ul, ol { margin: 0.4rem 0 0.4rem 1.5rem; }
+    li { margin: 0.2rem 0; }
+    hr { border: none; border-top: 1px dashed var(--border); margin: 1.5rem 0; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 700px) {
+      .container { padding: 1rem; }
+      .toc { column-count: 1; }
+      .cover h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===================== COVER ===================== -->
+<div class="cover">
+  <h1>《矩阵论》模拟考试题</h1>
+  <div class="subtitle">详细解答与知识点解析</div>
+</div>
+
+<!-- ===================== TOC ===================== -->
+<div class="toc">
+  <h3>目 录</h3>
+  <a href="#p1">一、填空题 1 — 矩阵范数</a>
+  <a href="#p2">一、填空题 2 — 矩阵幂收敛</a>
+  <a href="#p3">一、填空题 3 — 可约性判断</a>
+  <a href="#p4">一、填空题 4 — 奇异值与Rayleigh商</a>
+  <a href="#p5">一、填空题 5 — 内积空间度量矩阵</a>
+  <a href="#p6">一、填空题 6 — 矩阵微积分</a>
+  <a href="#p7">一、填空题 7 — 广义逆矩阵</a>
+  <a href="#p8">一、填空题 8 — 子空间判定</a>
+  <a href="#c1">二、计算题 1 — 度量矩阵与内积</a>
+  <a href="#c2">二、计算题 2 — Jordan标准形</a>
+  <a href="#c3">二、计算题 3 — 矩阵指数函数</a>
+  <a href="#c4">二、计算题 4 — QR分解</a>
+  <a href="#c5">二、计算题 5 — Gerschgorin圆盘</a>
+  <a href="#c6">二、计算题 6 — 满秩分解与广义逆</a>
+  <a href="#d1">三、证明题 1 — Cayley-Hamilton定理</a>
+  <a href="#d2">三、证明题 2 — 矩阵范数不等式</a>
+</div>
+
+<!-- ============================================================ -->
+<!--                     第一部分：填空题                           -->
+<!-- ============================================================ -->
+<h2 class="part-title">一、填空题（共 24 分，每小题 3 分）</h2>
+
+<!-- ===== 填空 1 ===== -->
+<div class="problem-card" id="p1">
+  <div class="problem-header">
+    填空题 1
+    <span class="kp">矩阵范数 · 向量2-范数</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设 $A = \begin{pmatrix} 1 & 0 & i \\ 0 & 1 & 2 \\ -i & 2 & 5 \end{pmatrix}$，$x = \begin{pmatrix} 1 \\ 1 \\ i \end{pmatrix}$，求 $\|Ax\|_2$，$\|A\|_1$，$\|A\|_\infty$。
+    </div>
+
+    <span class="solution-label">解</span>
+
+    <div class="step">
+      <p class="step-title">① 计算 $\|Ax\|_2$</p>
+      <p>先计算 $Ax$：</p>
+      $$Ax = \begin{pmatrix} 1 & 0 & i \\ 0 & 1 & 2 \\ -i & 2 & 5 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \\ i \end{pmatrix} = \begin{pmatrix} 1+0+i^2 \\ 1+2i \\ -i+2+5i \end{pmatrix} = \begin{pmatrix} 0 \\ 1+2i \\ 2+4i \end{pmatrix}$$
+      <p>注意 $i^2 = -1$，所以第一分量 $1 + (-1) = 0$。</p>
+      <p>对复向量，$\|v\|_2 = \sqrt{\sum|v_k|^2}$，故</p>
+      $$\|Ax\|_2 = \sqrt{0 + 5 + 20} = \sqrt{25} = \boxed{5}$$
+    </div>
+
+    <div class="step">
+      <p class="step-title">② 计算 $\|A\|_1$（列和范数）</p>
+      <ul>
+        <li>第 1 列：$1+0+1=2$</li>
+        <li>第 2 列：$0+1+2=3$</li>
+        <li>第 3 列：$1+2+5=8$</li>
+      </ul>
+      <div class="answer-box">$\|A\|_1 = \boxed{8}$</div>
+    </div>
+
+    <div class="step">
+      <p class="step-title">③ 计算 $\|A\|_\infty$（行和范数）</p>
+      <ul>
+        <li>第 1 行：$1+0+1=2$</li>
+        <li>第 2 行：$0+1+2=3$</li>
+        <li>第 3 行：$1+2+5=8$</li>
+      </ul>
+      <div class="answer-box">$\|A\|_\infty = \boxed{8}$</div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>向量 2-范数（复向量取模平方和再开方）；矩阵 1-范数（最大列绝对值和）；矩阵 $\infty$-范数（最大行绝对值和）。关键易错点：$i^2=-1$ 导致 $Ax$ 的第一分量为零。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 2 ===== -->
+<div class="problem-card" id="p2">
+  <div class="problem-header">
+    填空题 2
+    <span class="kp">谱半径 · 矩阵幂收敛</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设 $A = \dfrac{1}{10}\begin{pmatrix} 1 & 2 \\ 8 & 1 \end{pmatrix}$，则 $\{A^n\}$ 是否收敛？
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p class="step-title">求特征值</p>
+      <p>令 $B=10A$，$\det(B-\lambda I)=(1-\lambda)^2-16=\lambda^2-2\lambda-15=0$，</p>
+      <p>$B$ 的特征值 $\lambda_1=5,\;\lambda_2=-3$，故 $A$ 的特征值 $\mu_1=\frac12,\;\mu_2=-\frac3{10}$。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">判断收敛</p>
+      <p>$\rho(A)=\frac12<1$，故 $\{A^n\}$ <strong>收敛</strong>于零矩阵。</p>
+      <div class="answer-box">$\{A^n\}$ 收敛（收敛到零矩阵）。</div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>谱半径 $\rho(A)$ 与矩阵幂收敛定理。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 3 ===== -->
+<div class="problem-card" id="p3">
+  <div class="problem-header">
+    填空题 3
+    <span class="kp">可约矩阵 · 有向图</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      判断矩阵 $\begin{pmatrix} 1 & 2 & 0 \\ 2 & 1 & 3 \\ 0 & 2 & 1 \end{pmatrix}$ 是否可约？
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p>非零非对角元素给出有向边：$1\leftrightarrow 2\leftrightarrow 3$，图强连通。</p>
+      <p>矩阵不可约 $\iff$ 有向图强连通。</p>
+      <div class="answer-box">不可约。</div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>可约矩阵的等价条件：有向图是否强连通。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 4 ===== -->
+<div class="problem-card" id="p4">
+  <div class="problem-header">
+    填空题 4
+    <span class="kp">奇异值 · Rayleigh商</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设 $A\in\mathbb{R}^{m\times m}$ 的奇异值为 $\sigma_1\ge\sigma_2\ge\cdots\ge\sigma_m$，$R(x)=\dfrac{x^\top A^\top Ax}{x^\top x}\;(x\neq 0)$，求 $\max_{x\neq 0}R(x)$。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p>$R(x)$ 是 $A^\top A$ 的 Rayleigh 商，$A^\top A$ 特征值为 $\sigma_1^2\ge\cdots\ge\sigma_m^2$。</p>
+      <div class="answer-box">$\max_{x\neq 0}R(x) = \boxed{\sigma_1^2}$</div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>奇异值与 Rayleigh 商极值定理。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 5 ===== -->
+<div class="problem-card" id="p5">
+  <div class="problem-header">
+    填空题 5
+    <span class="kp">内积空间 · 度量矩阵</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设欧氏空间 $P[t]_2$ 中的内积为 $[f,g]=\int_0^1 f(t)g(t)\,dt$，求基 $1,\,t,\,t^2$ 的度量矩阵。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p>$g_{ij}=\int_0^1 t^{i+j-2}\,dt=\dfrac{1}{i+j-1}$，</p>
+      <div class="answer-box">
+        $$G = \begin{pmatrix} 1 & \frac{1}{2} & \frac{1}{3} \\[4pt] \frac{1}{2} & \frac{1}{3} & \frac{1}{4} \\[4pt] \frac{1}{3} & \frac{1}{4} & \frac{1}{5} \end{pmatrix}$$
+      </div>
+    </div>
+    <div class="note">此即 3 阶 <strong>Hilbert 矩阵</strong>。</div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>度量矩阵（Gram 矩阵）与多项式空间积分内积。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 6 ===== -->
+<div class="problem-card" id="p6">
+  <div class="problem-header">
+    填空题 6
+    <span class="kp">矩阵微积分 · 向量对向量求导</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设 $x=(x_1,x_2,\dots,x_n)^\top\in\mathbb{R}^n$，求 $\dfrac{d\,x^\top}{d\,x}=\underline{\hspace{2cm}}$。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p>$x^\top$ 为 $1\times n$ 行向量，$x$ 为 $n\times 1$ 列向量。</p>
+      <p>导数的 $(i,j)$ 元素为：</p>
+      $$\left(\frac{d\,x^\top}{d\,x}\right)_{ij}=\frac{\partial x_j}{\partial x_i}=\delta_{ij}=\begin{cases}1,&i=j\\0,&i\neq j\end{cases}$$
+      <div class="answer-box">$$\frac{d\,x^\top}{d\,x} = \boxed{I_n}$$</div>
+    </div>
+    <div class="note">
+      <strong>补充：</strong>结果为 $n\times n$ 单位矩阵（雅可比矩阵）。类似地，$\dfrac{d\,x}{d\,x^\top}=I_n$。
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>矩阵微积分中向量对向量的求导（雅可比矩阵）；Kronecker delta；$\frac{d\,x^\top}{d\,x}=I_n$ 是基本公式。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 7 ===== -->
+<div class="problem-card" id="p7">
+  <div class="problem-header">
+    填空题 7
+    <span class="kp">广义逆矩阵 · 自反减号逆</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设 $A=\begin{pmatrix}1&1&1&1\\1&1&1&1\end{pmatrix}$，则 $A$ 的一个自反减号逆为______。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p class="step-title">① 秩分解</p>
+      <p>$\operatorname{rank}(A)=1$，将 $A$ 分解为 $A=CR$：</p>
+      $$C=\begin{pmatrix}1\\1\end{pmatrix}_{2\times 1},\qquad R=\begin{pmatrix}1&1&1&1\end{pmatrix}_{1\times 4}$$
+    </div>
+    <div class="step">
+      <p class="step-title">② 求 $C$ 和 $R$ 的 $\{1\}$-逆</p>
+      <p>利用满秩矩阵的 $\{1\}$-逆标准公式：</p>
+      <p><strong>$C$ 的 $\{1\}$-逆</strong>（列满秩用左逆公式）：</p>
+      $$C^{(1)}=(C^\top C)^{-1}C^\top=\frac{1}{2}(1,\;1)=\left(\tfrac{1}{2},\;\tfrac{1}{2}\right)_{1\times 2}$$
+      <p>验证：$C^{(1)}C=\frac{1}{2}+\frac{1}{2}=1=I_1$ ✓</p>
+      <p><strong>$R$ 的 $\{1\}$-逆</strong>（行满秩用右逆公式）：</p>
+      $$R^{(1)}=R^\top(RR^\top)^{-1}=\frac{1}{4}\begin{pmatrix}1\\1\\1\\1\end{pmatrix}_{4\times 1}$$
+      <p>验证：$RR^{(1)}=\frac{1}{4}(1+1+1+1)=1=I_1$ ✓</p>
+    </div>
+    <div class="step">
+      <p class="step-title">③ 构造自反减号逆 $A^-=R^{(1)}C^{(1)}$</p>
+      $$A^-=\frac{1}{4}\begin{pmatrix}1\\1\\1\\1\end{pmatrix}\left(\tfrac{1}{2},\;\tfrac{1}{2}\right)=\frac{1}{8}\begin{pmatrix}1&1\\1&1\\1&1\\1&1\end{pmatrix}_{4\times 2}$$
+    </div>
+    <div class="step">
+      <p class="step-title">④ 验证 $\{1,2\}$-逆条件</p>
+      <p><strong>条件 1：$AA^-A=A$</strong></p>
+      $$AA^-=\begin{pmatrix}1&1&1&1\\1&1&1&1\end{pmatrix}\cdot\frac{1}{8}\begin{pmatrix}1&1\\1&1\\1&1\\1&1\end{pmatrix}=\frac{1}{8}\begin{pmatrix}4&4\\4&4\end{pmatrix}=\begin{pmatrix}\frac12&\frac12\\[2pt]\frac12&\frac12\end{pmatrix}$$
+      $$AA^-A=\begin{pmatrix}\frac12&\frac12\\[2pt]\frac12&\frac12\end{pmatrix}\begin{pmatrix}1&1&1&1\\1&1&1&1\end{pmatrix}=\begin{pmatrix}1&1&1&1\\1&1&1&1\end{pmatrix}=A \quad\checkmark$$
+      <p><strong>条件 2：$A^-AA^-=A^-$</strong></p>
+      $$A^-A=\frac{1}{8}\begin{pmatrix}1&1\\1&1\\1&1\\1&1\end{pmatrix}\begin{pmatrix}1&1&1&1\\1&1&1&1\end{pmatrix}=\frac{1}{8}\begin{pmatrix}2&2&2&2\\2&2&2&2\\2&2&2&2\\2&2&2&2\end{pmatrix}=\begin{pmatrix}\frac14&\frac14&\frac14&\frac14\\[2pt]\frac14&\frac14&\frac14&\frac14\\[2pt]\frac14&\frac14&\frac14&\frac14\\[2pt]\frac14&\frac14&\frac14&\frac14\end{pmatrix}$$
+      $$A^-AA^-=\begin{pmatrix}\frac14&\frac14&\frac14&\frac14\\[2pt]\frac14&\frac14&\frac14&\frac14\\[2pt]\frac14&\frac14&\frac14&\frac14\\[2pt]\frac14&\frac14&\frac14&\frac14\end{pmatrix}\cdot\frac{1}{8}\begin{pmatrix}1&1\\1&1\\1&1\\1&1\end{pmatrix}=\frac{1}{8}\begin{pmatrix}1&1\\1&1\\1&1\\1&1\end{pmatrix}=A^- \quad\checkmark$$
+      <div class="answer-box">
+        $$A^- = \frac{1}{8}\begin{pmatrix}1&1\\1&1\\1&1\\1&1\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>广义逆矩阵：$\{1\}$-逆（减号逆）满足 $AA^-A=A$；自反减号逆（$\{1,2\}$-逆）还需 $A^-AA^-=A^-$；利用秩分解 $A=CR$ 构造 $A^-=R^{(1)}C^{(1)}$，其中 $C^{(1)}=(C^\top C)^{-1}C^\top$，$R^{(1)}=R^\top(RR^\top)^{-1}$。</p>
+  </div>
+</div>
+
+<!-- ===== 填空 8 ===== -->
+<div class="problem-card" id="p8">
+  <div class="problem-header">
+    填空题 8
+    <span class="kp">子空间 · 反对称矩阵</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      线性空间 $\mathbb{R}^{m\times n}\;(n>1)$ 的子集 $V=\{A\mid A^\top=-A,\;A\in\mathbb{R}^{m\times n}\}$ 是否为子空间？
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p>条件 $A^\top=-A$ 要求 $m=n$。</p>
+      <p><strong>当 $m\neq n$ 时：</strong>$V=\varnothing$，不是子空间。</p>
+      <p><strong>当 $m=n$ 时：</strong>零矩阵在 $V$ 中；对 $A,B\in V$，$(A+B)^\top=-(A+B)$；对 $k\in\mathbb{R}$，$(kA)^\top=-kA$。满足子空间三个条件。</p>
+      <div class="answer-box">当 $m=n$ 时，$V$ 是子空间；当 $m\neq n$ 时，$V$ 不是子空间。</div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>子空间判定条件（非空、加法封闭、数乘封闭）；反对称矩阵仅对方阵有意义。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--                     第二部分：计算题                           -->
+<!-- ============================================================ -->
+<h2 class="part-title">二、计算题（共 60 分，每小题 10 分）</h2>
+
+<!-- ===== 计算 1 ===== -->
+<div class="problem-card" id="c1">
+  <div class="problem-header">
+    计算题 1
+    <span class="kp">度量矩阵 · 基变换 · 内积计算</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      向量组 $\alpha_1=(1,1,0)^\top,\;\alpha_2=(1,-1,0)^\top,\;\alpha_3=(0,0,1)^\top$ 在某内积下的度量矩阵为 $G_\alpha=\begin{pmatrix}1&-1&0\\-1&2&-1\\0&-1&1\end{pmatrix}$。<br>
+      (1) 求标准基 $e_1,e_2,e_3$ 的度量矩阵 $G_e$；<br>
+      (2) 求 $\alpha=(1,2,1)^\top$ 与 $\beta=(-1,0,1)^\top$ 的内积。
+    </div>
+
+    <span class="solution-label">解 (1)</span>
+    <div class="step">
+      <p>过渡矩阵 $P=\begin{pmatrix}1&1&0\\1&-1&0\\0&0&1\end{pmatrix}$，$G_\alpha=P^\top G_e P$，故 $G_e=(P^{-1})^\top G_\alpha P^{-1}$。</p>
+      <p>$\det P=-2$，</p>
+      $$P^{-1}=\begin{pmatrix}\frac12&\frac12&0\\[2pt]\frac12&-\frac12&0\\[2pt]0&0&1\end{pmatrix}$$
+      <p>由于 $P$ 对称，$(P^{-1})^\top=P^{-1}$。计算得：</p>
+      <div class="answer-box">
+        $$G_e=\begin{pmatrix}\frac14&-\frac14&-\frac12\\[4pt]-\frac14&\frac54&\frac12\\[4pt]-\frac12&\frac12&1\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="solution-label">解 (2)</span>
+    <div class="step">
+      <p>$[\alpha,\beta]=\alpha^\top G_e\,\beta$：</p>
+      $$G_e\beta=\begin{pmatrix}-\frac34\\\frac34\\\frac32\end{pmatrix},\quad \alpha^\top G_e\beta=(1)\!\left(-\tfrac34\right)+(2)\!\left(\tfrac34\right)+(1)\!\left(\tfrac32\right)=\frac{9}{4}$$
+      <div class="answer-box">$[\alpha,\beta]=\boxed{\dfrac{9}{4}}$</div>
+    </div>
+    <div class="note">
+      <strong>验证：</strong>$\alpha$ 在 $\{\alpha_k\}$ 下坐标 $(\frac32,-\frac12,1)^\top$，$\beta$ 的坐标 $(-\frac12,-\frac12,1)^\top$。直接用 $G_\alpha$ 计算得 $\frac{9}{4}$，一致。
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>度量矩阵基变换公式 $G_\alpha=P^\top G_e P$；矩阵求逆；内积计算。</p>
+  </div>
+</div>
+
+<!-- ===== 计算 2 ===== -->
+<div class="problem-card" id="c2">
+  <div class="problem-header">
+    计算题 2
+    <span class="kp">Jordan标准形</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      求 $A=\begin{pmatrix}1&0&1\\1&1&2\\0&0&3\end{pmatrix}$ 的 Jordan 标准形。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p class="step-title">特征多项式</p>
+      $$\det(A-\lambda I)=(3-\lambda)(1-\lambda)^2$$
+      <p>$\lambda_1=1$（代数重数 2），$\lambda_2=3$（代数重数 1）。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">$\lambda=1$ 的 Jordan 块</p>
+      <p>$A-I$ 行变换后 $\operatorname{rank}=2$，零空间维数 $=1<$ 代数重数 $=2$，故为 $2\times 2$ Jordan 块。</p>
+    </div>
+    <div class="step">
+      <div class="answer-box">
+        $$J=\begin{pmatrix}1&1&0\\0&1&0\\0&0&3\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>Jordan 标准形构造；代数重数与几何重数的关系。</p>
+  </div>
+</div>
+
+<!-- ===== 计算 3 ===== -->
+<div class="problem-card" id="c3">
+  <div class="problem-header">
+    计算题 3
+    <span class="kp">矩阵指数 · 待定系数法</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      已知 $A=\begin{pmatrix}-2&1&0\\-4&2&0\\1&0&1\end{pmatrix}$，用待定系数法求 $e^{At}$。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p class="step-title">特征多项式与最小多项式</p>
+      <p>$\det(A-\lambda I)=(1-\lambda)\lambda^2$，特征值 $\lambda=0$（重数 2），$\lambda=1$（重数 1）。</p>
+      <p>$A^2=\begin{pmatrix}0&0&0\\0&0&0\\-1&1&1\end{pmatrix}$，$A^3=A^2$，最小多项式 $m(\lambda)=\lambda^2(\lambda-1)$。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">待定系数</p>
+      <p>设 $e^{\lambda t}=q(\lambda)\cdot\lambda^2(\lambda-1)+r(\lambda)$，$r(\lambda)=a_0+a_1\lambda+a_2\lambda^2$。</p>
+      <ol>
+        <li>$r(0)=1$ $\Rightarrow$ $a_0=1$</li>
+        <li>$r'(0)=t$ $\Rightarrow$ $a_1=t$</li>
+        <li>$r(1)=e^t$ $\Rightarrow$ $a_2=e^t-1-t$</li>
+      </ol>
+      <p>$e^{At}=I+tA+(e^t-1-t)A^2$。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">代入计算</p>
+      <div class="answer-box">
+        $$e^{At}=\begin{pmatrix}1-2t & t & 0 \\ -4t & 1+2t & 0 \\ 1+2t-e^t & e^t-1-t & e^t\end{pmatrix}$$
+      </div>
+      <p>验证：$e^{A\cdot 0}=I$ ✓，$\frac{d}{dt}e^{At}\big|_{t=0}=A$ ✓</p>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>矩阵函数待定系数法；最小多项式插值条件。</p>
+  </div>
+</div>
+
+<!-- ===== 计算 4 ===== -->
+<div class="problem-card" id="c4">
+  <div class="problem-header">
+    计算题 4
+    <span class="kp">QR分解 · Givens旋转</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      用 Givens 变换求 $A=\begin{pmatrix}2&\sqrt5&0\\0&3&\sqrt{10}\\1&0&0\end{pmatrix}$ 的 QR 分解。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p class="step-title">① $G_{13}$：消去 $a_{31}=1$</p>
+      <p>$(a_{11},a_{31})=(2,1)$，$r=\sqrt5$，$c=\frac{2}{\sqrt5}$，$s=\frac{1}{\sqrt5}$。</p>
+      $$G_{13}A=\begin{pmatrix}\sqrt5&2&0\\0&3&\sqrt{10}\\0&-1&0\end{pmatrix}$$
+    </div>
+    <div class="step">
+      <p class="step-title">② $G_{23}$：消去 $-1$</p>
+      <p>$(a_{22},a_{32})=(3,-1)$，$r=\sqrt{10}$，$c=\frac{3}{\sqrt{10}}$，$s=\frac{-1}{\sqrt{10}}$。</p>
+      $$R=\begin{pmatrix}\sqrt5&2&0\\0&\sqrt{10}&3\\0&0&1\end{pmatrix}$$
+    </div>
+    <div class="step">
+      <p class="step-title">③ $Q=G_{13}^\top G_{23}^\top$</p>
+      <div class="answer-box">
+        $$Q=\begin{pmatrix}\frac{2}{\sqrt5}&\frac{1}{5\sqrt2}&\frac{-3}{5\sqrt2}\\[4pt]0&\frac{3}{\sqrt{10}}&\frac{1}{\sqrt{10}}\\[4pt]\frac{1}{\sqrt5}&\frac{-2}{5\sqrt2}&\frac{6}{5\sqrt2}\end{pmatrix},\quad R=\begin{pmatrix}\sqrt5&2&0\\0&\sqrt{10}&3\\0&0&1\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>Givens 旋转构造与 QR 分解。</p>
+  </div>
+</div>
+
+<!-- ===== 计算 5 ===== -->
+<div class="problem-card" id="c5">
+  <div class="problem-header">
+    计算题 5
+    <span class="kp">Gerschgorin圆盘定理</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      应用 Gerschgorin 圆盘定理隔离矩阵 $A=\begin{pmatrix}100i&10&20\\8&200&50\\10&40&100\end{pmatrix}$ 的特征值。
+    </div>
+
+    <span class="solution-label">解</span>
+    <div class="step">
+      <p class="step-title">行圆盘</p>
+      <ul>
+        <li>$D_1$：中心 $100i$，半径 $30$</li>
+        <li>$D_2$：中心 $200$，半径 $58$</li>
+        <li>$D_3$：中心 $100$，半径 $50$</li>
+      </ul>
+      <p>$D_1$ 与 $D_2,D_3$ 分离；$D_2,D_3$ 重叠。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">相似变换 $\tilde{A}=D^{-1}AD$（$D=\operatorname{diag}(1,2,2)$）</p>
+      $$\tilde{A}=\begin{pmatrix}100i&20&40\\4&200&50\\5&40&100\end{pmatrix}$$
+      <p>新圆盘：$\tilde{D}_1$：中心 $100i$，半径 $60$；$\tilde{D}_2$：中心 $200$，半径 $54$；$\tilde{D}_3$：中心 $100$，半径 $45$。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">验证两两分离</p>
+      <p>$|100i-200|=224>114$ ✓，$|100i-100|=141>105$ ✓，$|200-100|=100>99$ ✓</p>
+      <div class="answer-box">
+        每个圆盘含一个特征值：<br>
+        $\lambda_1\in\tilde{D}_1:\;|z-100i|\le 60$，$\;\lambda_2\in\tilde{D}_2:\;|z-200|\le 54$，$\;\lambda_3\in\tilde{D}_3:\;|z-100|\le 45$
+      </div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>Gerschgorin 圆盘定理；相似变换调整圆盘半径。</p>
+  </div>
+</div>
+
+<!-- ===== 计算 6 ===== -->
+<div class="problem-card" id="c6">
+  <div class="problem-header">
+    计算题 6
+    <span class="kp">满秩分解 · Moore-Penrose逆 · 最小范数最小二乘解</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      已知 $A=\begin{pmatrix}1&2&2&1\\1&1&1&1\\2&1&1&2\end{pmatrix}$，$b=\begin{pmatrix}1\\1\\1\end{pmatrix}$，<br>
+      (1) 求 $A$ 的满秩分解；(2) 求 $A^+$；(3) 求 $Ax=b$ 的极小范数最小二乘解 $x_0$。
+    </div>
+
+    <span class="solution-label">解 (1) 满秩分解</span>
+    <div class="step">
+      <p>$A$ 行变换得 $\operatorname{rank}=2$，主元列 1、2。</p>
+      <div class="answer-box">
+        $$A=CR=\begin{pmatrix}1&2\\1&1\\2&1\end{pmatrix}\begin{pmatrix}1&0&0&1\\0&1&1&0\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="solution-label">解 (2) $A^+$</span>
+    <div class="step">
+      <p>$A^+=R^+C^+$：</p>
+      <p>$R^+=R^\top(RR^\top)^{-1}=\begin{pmatrix}\frac12&0\\0&\frac12\\0&\frac12\\\frac12&0\end{pmatrix}$，$\;C^+=(C^\top C)^{-1}C^\top=\frac{1}{11}\begin{pmatrix}-4&1&7\\7&1&-4\end{pmatrix}$</p>
+      <div class="answer-box">
+        $$A^+=\frac{1}{22}\begin{pmatrix}-4&1&7\\7&1&-4\\7&1&-4\\-4&1&7\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="solution-label">解 (3) 极小范数最小二乘解</span>
+    <div class="step">
+      <p>$b\notin\operatorname{Col}(A)$，方程不相容。</p>
+      <p>$x_0=A^+b=\frac{1}{22}\begin{pmatrix}4\\4\\4\\4\end{pmatrix}$</p>
+      <div class="answer-box">
+        $$x_0=\begin{pmatrix}\frac{2}{11}\\[2pt]\frac{2}{11}\\[2pt]\frac{2}{11}\\[2pt]\frac{2}{11}\end{pmatrix}$$
+      </div>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>满秩分解；Moore-Penrose 伪逆；极小范数最小二乘解 $x_0=A^+b$。</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--                     第三部分：证明题                           -->
+<!-- ============================================================ -->
+<h2 class="part-title">三、证明题（共 16 分，每小题 8 分）</h2>
+
+<!-- ===== 证明 1 ===== -->
+<div class="problem-card" id="d1">
+  <div class="problem-header">
+    证明题 1
+    <span class="kp">Cayley-Hamilton定理 · 数学归纳法</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      设 $A=\begin{pmatrix}1&0&0\\1&0&1\\0&1&0\end{pmatrix}$，证明：$A^n=A^{n-2}+A^2-E\;(n\ge 3)$。
+    </div>
+
+    <span class="proof-label">证明</span>
+    <div class="step">
+      <p class="step-title">① Cayley-Hamilton 定理</p>
+      <p>特征多项式 $\det(A-\lambda I)=(1-\lambda)(\lambda^2-1)=\lambda^3-\lambda^2-\lambda+1$。</p>
+      <p>$A^3-A^2-A+E=O$，即 $A^3=A^2+A-E$（*）</p>
+    </div>
+    <div class="step">
+      <p class="step-title">② 基础情形 $n=3$</p>
+      <p>（*）式即 $A^3=A^1+A^2-E$。✓</p>
+    </div>
+    <div class="step">
+      <p class="step-title">③ 归纳步骤</p>
+      <p>设 $A^k=A^{k-2}+A^2-E$ 对 $3\le k\le n$ 成立。</p>
+      $$A^{n+1}=A\cdot A^n=A^{n-1}+A^3-A=A^{n-1}+A^2-E$$
+      <p>由数学归纳法，命题对所有 $n\ge 3$ 成立。$\blacksquare$</p>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>Cayley-Hamilton 定理；矩阵幂降阶；数学归纳法。</p>
+  </div>
+</div>
+
+<!-- ===== 证明 2 ===== -->
+<div class="problem-card" id="d2">
+  <div class="problem-header">
+    证明题 2
+    <span class="kp">矩阵范数 · 次乘性</span>
+  </div>
+  <div class="problem-body">
+    <div class="problem-statement">
+      若 $A$ 可逆，证明 $\|A^{-1}\|\ge\|A\|^{-1}$。
+    </div>
+
+    <span class="proof-label">证明</span>
+    <div class="step">
+      <p class="step-title">① $\|I\|\ge 1$</p>
+      <p>由次乘性 $\|I\|=\|I\cdot I\|\le\|I\|^2$，$\|I\|>0$，故 $\|I\|\ge 1$。</p>
+    </div>
+    <div class="step">
+      <p class="step-title">② 应用次乘性</p>
+      $$1\le\|I\|=\|A^{-1}A\|\le\|A^{-1}\|\cdot\|A\|$$
+      <p>因 $A$ 可逆，$\|A\|>0$，故 $\|A^{-1}\|\ge\|A\|^{-1}$。$\blacksquare$</p>
+    </div>
+
+    <span class="analysis-label">考查知识点</span>
+    <p>矩阵范数次乘性公理；$\|I\|\ge 1$。</p>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<div style="text-align:center; margin-top:3rem; padding-top:1.5rem; border-top:2px solid var(--border); color:var(--text-muted); font-size:0.85rem;">
+  <p>《矩阵论》模拟考试题详细解答</p>
+  <p style="margin-top:0.3rem;">涵盖核心知识点：线性空间与子空间 · 内积空间与度量矩阵 · 矩阵范数与谱半径 · 特征值与特征向量 · Jordan标准形 · 矩阵函数与指数 · QR分解 · Gerschgorin圆盘定理 · 广义逆矩阵 · Cayley-Hamilton定理</p>
+</div>
+
+</div><!-- .container -->
+</body>
+</html>
